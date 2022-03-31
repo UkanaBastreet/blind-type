@@ -13,12 +13,12 @@ function App() {
   const [errorsCount, setErrorsCount] = useState(0)
   const [timeStart, setTimeStart] = useState(0)
   const [timeEnd, setTimeEnd] = useState(0)
-
   const keyIndex = 15
 
   Array.prototype.remove = function (value) {
     delete this[this.indexOf(value)]
   }
+
   useEffect(() => {
     // console.log('mount')
     setKeys(keyboardArr)
@@ -26,7 +26,6 @@ function App() {
       console.log('unmount')
     }
   }, []);
-
   useEffect(() => {
     if (isStarted) {
       setValue(engValue.slice(0 + count, 30 + count))
@@ -37,7 +36,6 @@ function App() {
       end(new Date())
     }
   }, [count, isStarted])
-
   useEffect(() => {
     if (isStarted) {
       setKeys(keys => keys.map((key) => {
@@ -50,7 +48,6 @@ function App() {
       }));
     }
   }, [value])
-
   useEffect(() => {
     if (isModal) {
       setKeys(keyboardArr)
@@ -60,6 +57,9 @@ function App() {
   function start(timeStamp) {
     setTimeStart(timeStamp)
     setIsStarted(true)
+  }
+  function pause(){
+    
   }
   function end(timeStamp) {
     setTimeEnd(timeStamp)
