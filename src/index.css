@@ -233,7 +233,8 @@ h5 {
   justify-content: center;
 }
 .errorInputContainer input {
-  border-color: tomato;
+  border-color: brown;
+  background-color: tomato;
 }
 .lessons:hover .lessonsSection {
   display: block;

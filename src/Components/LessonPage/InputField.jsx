@@ -5,10 +5,11 @@ export const InputField = ({
   onKeyDownHandler,
   onKeyUpHandler,
   restart,
+  isError,
 }) => {
   return (
     <div className="inputField">
-      <div className="inputContainer">
+      <div className={isError ? "inputContainer errorInputContainer" : "inputContainer"}>
         <input readOnly className="inputblur" value={inputValue.slice(0, 15)} />
         <input
           autoFocus

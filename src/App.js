@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Header } from './Components/Header';
 import { LessonPage } from './Components/LessonPage/LessonPage';
 import { Modal } from './Components/Modal';
-import { engValue, getTime, keyboardArr, } from './utils';
+import { engValue, getTime, keyboardArr, } from './Helpers/utils/utils';
 
 function App() {
   const [keys, setKeys] = useState([])
@@ -10,6 +10,7 @@ function App() {
   const [value, setValue] = useState('    Press "Space" to start    ')
   const [isModal, setIsModal] = useState(false)
   const [isStarted, setIsStarted] = useState(false)
+  const [isError, setIsError] = useState(false)
   const [errorsCount, setErrorsCount] = useState(0)
   const [timeStart, setTimeStart] = useState(0)
   const [timeEnd, setTimeEnd] = useState(0)
@@ -58,8 +59,8 @@ function App() {
     setTimeStart(timeStamp)
     setIsStarted(true)
   }
-  function pause(){
-    
+  function pause() {
+
   }
   function end(timeStamp) {
     setTimeEnd(timeStamp)
@@ -68,6 +69,9 @@ function App() {
   }
   function setIsModalhandler(isModal) {
     setIsModal(isModal)
+  }
+  function incrementCount() {
+    setCountHandler(count => count + 1)
   }
   function setCountHandler(count_) {
     setCount(count_)
@@ -92,13 +96,14 @@ function App() {
           if (key.name !== value[keyIndex]) {
             setErrorsCount(count => count + 1)
             key.classList.push(isStarted ? 'wrongKey' : 'activeKey')
+            setIsError(isStarted ? true : false)
           }
           if (key.name === value[keyIndex]) {
             key.classList.remove('rightKey')
             key.classList.remove(isStarted ? 'wrongKey' : 'activeKey')
             key.classList.push('activeKey')
             if (isStarted) {
-              setCountHandler(count => count + 1)
+              incrementCount()
             }
           }
         }
@@ -113,6 +118,7 @@ function App() {
       key.classList.remove('wrongKey')
       key.classList.remove('activeKey')
       // }
+      setIsError(false)
       return key
     }))
   }
@@ -126,10 +132,12 @@ function App() {
       {isModal
         ?
         <Modal
+          enteredSymbols={count}
           setIsModal={setIsModal}
           restart={restart}
           errorsCount={errorsCount}
           time={getTime(timeEnd - timeStart)}
+          accuracy={(((engValue.length - errorsCount) / engValue.length) * 100).toFixed(2)}
         />
         :
         <LessonPage
@@ -139,8 +147,7 @@ function App() {
           inputValue={value}
           onKeyDownHandler={onKeyDown}
           onKeyUpHandler={onKeyUp}
-        // isError={isError}
-        // inputValue={value}
+          isError={isError}
         />}
     </div >
   );

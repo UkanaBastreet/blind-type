@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 
-export const Modal = ({ setIsModal, restart, errorsCount, time }) => {
+export const Modal = ({ setIsModal, restart, errorsCount, time, accuracy,enteredSymbols }) => {
   const modal = useRef(null);
+  console.log(accuracy);
   useEffect(() => {
     modal.current.focus();
   }, []);
@@ -35,7 +36,11 @@ export const Modal = ({ setIsModal, restart, errorsCount, time }) => {
           <div className="modalContent">
             Press "Enter" to restart
             <br />
-            Your errors count is : {errorsCount}
+            Entered symbols: {enteredSymbols}
+            <br />
+            Erros: {errorsCount}
+            <br />
+            Accuracy: {accuracy}%
             <br />
             Time: {time}
           </div>
