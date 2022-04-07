@@ -1,9 +1,10 @@
 import React from "react";
+import { Select } from "./UI/Select/Select";
 
 export const Header = (props) => {
   return (
     <div className="header">
-      <div className="name" onClick={()=>console.log('first')}>
+      <div className="name" onClick={() => console.log("first")}>
         <h2> Blind Type</h2>
       </div>
       <div className="lessonType">
@@ -11,21 +12,7 @@ export const Header = (props) => {
       </div>
       <div className="navbar">
         <div className="navbarPanel">
-          <div className="lessons">
-            {/* <h4>Lessons</h4>
-            <span className="lessonsSection">
-              <ul>
-                <li>wasd</li>
-              </ul>
-            </span> */}
-            <select name="lessonsSelect" className="lessonsSelect">
-              {/* {props.lessons.map(lesson=>{
-                return (
-                  <option value={lesson.value}></option>
-                )
-              })} */}
-            </select>
-          </div>
+          <Select current={"ENG"} values={["RUS", "ENG"]} handler={props.setLanguage}/>
           <div className="trainig">
             <h4>Training</h4>
           </div>

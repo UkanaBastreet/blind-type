@@ -1,154 +1,91 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import { Header } from './Components/Header';
+import { Info } from './Components/Info';
 import { LessonPage } from './Components/LessonPage/LessonPage';
 import { Modal } from './Components/Modal';
-import { engValue, getTime, keyboardArr, } from './Helpers/utils/utils';
+import { Button } from './Components/UI/Button/Button';
+import { engKeys, engValue, getTime, keyboardArr, } from './Helpers/utils/utils';
+import { initialState, reducer, setKeys_AC } from './Reducers/LessonCycleReducer';
 
 function App() {
-  const [keys, setKeys] = useState([])
-  const [count, setCount] = useState(0)
-  const [value, setValue] = useState('    Press "Space" to start    ')
-  const [isModal, setIsModal] = useState(false)
-  const [isStarted, setIsStarted] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const [errorsCount, setErrorsCount] = useState(0)
-  const [timeStart, setTimeStart] = useState(0)
-  const [timeEnd, setTimeEnd] = useState(0)
-  const keyIndex = 15
-
   Array.prototype.remove = function (value) {
     delete this[this.indexOf(value)]
   }
 
-  useEffect(() => {
-    // console.log('mount')
-    setKeys(keyboardArr)
-    return () => {
-      console.log('unmount')
-    }
-  }, []);
-  useEffect(() => {
-    if (isStarted) {
-      setValue(engValue.slice(0 + count, 30 + count))
-    } else {
-      setValue('    Press "Space" to start    ')
-    }
-    if (isStarted && count === engValue.length - 15) {
-      end(new Date())
-    }
-  }, [count, isStarted])
-  useEffect(() => {
-    if (isStarted) {
-      setKeys(keys => keys.map((key) => {
-        key.classList.remove('wrongKey')
-        key.classList.remove('rightKey')
-        if (key.name === value[keyIndex]) {
-          key.classList.push('rightKey')
-        }
-        return key
-      }));
-    }
-  }, [value])
-  useEffect(() => {
-    if (isModal) {
-      setKeys(keyboardArr)
-    }
-  }, [isModal])
+  const [state, dispatch] = useReducer(reducer, initialState)
 
-  function start(timeStamp) {
-    setTimeStart(timeStamp)
-    setIsStarted(true)
-  }
-  function pause() {
-
-  }
-  function end(timeStamp) {
-    setTimeEnd(timeStamp)
-    setIsStarted(false)
-    setIsModalhandler(true)
-  }
-  function setIsModalhandler(isModal) {
-    setIsModal(isModal)
-  }
-  function incrementCount() {
-    setCountHandler(count => count + 1)
-  }
-  function setCountHandler(count_) {
-    setCount(count_)
-  }
-  const restart = () => {
-    setIsStarted(false)
-    setCount(0)
-  }
-
-  const onKeyDown = useCallback((e) => {
-    // console.log('e', e)
-    if (e.code === "Escape") {
-      end(new Date())
-    }
-    if (e.code === 'Space' & !isStarted) {
-      start(new Date())
-    }
-    // console.log(count, engValue.length)
-    setKeys(keys.map(key => {
-      if (key.classList.indexOf('wrongKey') === -1) {
+  console.log(dispatch)
+  const onKeyDown = (e) => {
+    e.preventDefault()
+    let newKeys = state.keys.map(key => {
+      if (key.classList.indexOf(state.isStarted ? 'wrongKey' : 'activeKey') === -1) {
         if (e.nativeEvent.code === key.code) {
-          if (key.name !== value[keyIndex]) {
-            setErrorsCount(count => count + 1)
-            key.classList.push(isStarted ? 'wrongKey' : 'activeKey')
-            setIsError(isStarted ? true : false)
-          }
-          if (key.name === value[keyIndex]) {
+          if (key.name !== state.value[state.keyIndex]) {
+            if (state.isStarted) {
+              // setErrors(count => count + 1)
+            }
+            // setIsError((state.isStarted && !state.isModal) ? true : false)
+            key.classList.push(state.isStarted ? 'wrongKey' : 'activeKey')
+          } else {
             key.classList.remove('rightKey')
-            key.classList.remove(isStarted ? 'wrongKey' : 'activeKey')
+            key.classList.remove(state.isStarted ? 'wrongKey' : 'activeKey')
             key.classList.push('activeKey')
-            if (isStarted) {
-              incrementCount()
+            if (state.isStarted) {
+              // incrementCount()
             }
           }
         }
       }
       return key
-    }))
-  }, [count, value, keys])
-
-  const onKeyUp = (e = null) => {
-    setKeys(keys.map(key => {
-      // if (key.code === e.code) {
-      key.classList.remove('wrongKey')
-      key.classList.remove('activeKey')
+    })
+    dispatch(setKeys_AC(newKeys))
+  }
+  const onKeyUp = (e) => {
+    let newKeys = state.keys.map(key => {
+      // if (e.code === key.code) {
+        key.classList.remove(state.isStarted ? 'wrongKey' : 'activeKey')
       // }
-      setIsError(false)
       return key
-    }))
+    })
+    dispatch(setKeys_AC(newKeys))
   }
 
-  // ====================================================
-
+  const setLanguage = (lang) => {
+    console.log(lang)
+  }
   return (
     <div className="App"  >
-      <Header />
-      {count}
-      {isModal
+      <Header
+        setLanguage={setLanguage}
+      />
+      <Info
+        // isInfo={isInfo}
+        // setIsInfo={setIsInfo}
+        info={state}
+      />
+      {/* {isModal
         ?
         <Modal
-          enteredSymbols={count}
-          setIsModal={setIsModal}
-          restart={restart}
-          errorsCount={errorsCount}
-          time={getTime(timeEnd - timeStart)}
-          accuracy={(((engValue.length - errorsCount) / engValue.length) * 100).toFixed(2)}
+          // pause={pause}
+          // unpause={unpause}
+          // isStarted={isStarted}
+          // enteredSymbols={count}
+          // setIsModal={setIsModal}
+          // errors={errors}
+          // time={getTime(time - pauseTime)}
+          // accuracy={(((engValue.length - errors) / engValue.length) * 100).toFixed(2)}
+          // restart={restart}
         />
-        :
-        <LessonPage
-          restart={restart}
-          keys={keys}
-          count={count}
-          inputValue={value}
-          onKeyDownHandler={onKeyDown}
-          onKeyUpHandler={onKeyUp}
-          isError={isError}
-        />}
+        : */}
+      <LessonPage
+        keys={state.keys}
+        count={state.count}
+        inputValue={state.value}
+        onKeyDownHandler={onKeyDown}
+        onKeyUpHandler={onKeyUp}
+        isError={state.isError}
+      />
+      {/* } */}
     </div >
   );
 }

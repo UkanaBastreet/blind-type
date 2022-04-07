@@ -1,8 +1,17 @@
 import React, { useEffect, useRef } from "react";
 
-export const Modal = ({ setIsModal, restart, errorsCount, time, accuracy,enteredSymbols }) => {
+export const Modal = ({
+  setIsModal,
+  pause,
+  unpause,
+  errorsCount,
+  time,
+  accuracy,
+  enteredSymbols,
+  isStarted,
+  restart,
+}) => {
   const modal = useRef(null);
-  console.log(accuracy);
   useEffect(() => {
     modal.current.focus();
   }, []);
@@ -17,11 +26,11 @@ export const Modal = ({ setIsModal, restart, errorsCount, time, accuracy,entered
           tabIndex="0"
           onKeyDown={(e) => {
             if (e.code === "Escape") {
-              setIsModal(false);
+              isStarted ? pause() : unpause();
             }
-            if (e.code === "Enter") {
-              setIsModal(false);
-              restart(e.timeStamp);
+            if (e.code === "Enter" && !isStarted) {
+              restart();
+              console.log('enter')
             }
           }}
         >

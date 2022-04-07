@@ -5,7 +5,66 @@ export const engKeysArr = [
   ['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/']
 ]
 
-export const keyboardArr = [
+export const engKeyboardArr = [
+  'Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace',
+  'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'BracketLeft', 'BracketRight', 'Backslash',
+  'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', 'Quote', 'Enter',
+  'ShiftLeft', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Period', 'Slash', 'ShiftRight',
+  'ControlLeft', 'Windows', 'AltLeft', 'Space', 'AltRight', 'FuncLock', 'Menu', 'ControlRight'
+].map((key) => {
+  let obj = {
+    'Backslash': '\\',
+    'Minus': '-',
+    'Equal': '=',
+    'BracketLeft': '[',
+    'BracketRight': ']',
+    'Semicolon': ';',
+    'Quote': "'",
+    'Comma': ',',
+    'Period': '.',
+    'Slash': '/',
+    'Tab': 'Tab',
+    'CapsLock': 'CapsLock',
+    'Enter': 'Enter',
+    'Backspace': 'Backspace',
+    'Windows': 'Windows',
+    'Menu': 'Menu',
+    'Backquote': '`',
+    'ShiftLeft': 'Shift',
+    'ShiftRight': 'Shift',
+    'ControlLeft': 'Control',
+    'ControlRight': 'Control',
+    'AltLeft': 'Alt',
+    'AltRight': 'Alt',
+    'FuncLock': 'Fn',
+    'Space': ' ',
+  }
+  if (obj[key]) {
+    return {
+      id: 0,
+      name: obj[key],
+      code: key,
+      classList: [key]
+    }
+  }
+  if (key.indexOf('Digit') >= 0) {
+    return {
+      id: 1,
+      name: key.slice(5, 6),
+      code: key,
+      classList: []
+    }
+  }
+  if (key.length === 1) {
+    return {
+      id: 2,
+      name: key,
+      code: 'Key' + key.toLocaleUpperCase(),
+      classList: []
+    }
+  }
+})
+export const rusKeyboardArr = [
   'Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace',
   'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'BracketLeft', 'BracketRight', 'Backslash',
   'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', 'Quote', 'Enter',
@@ -71,8 +130,8 @@ export const engKeys = `qwertyuiop[]asdfghjkl;'zxcvbnm,./ `.split('').map((key) 
     classList: ['key']
   }
 })
-export const engValue = '               Lorem ipsum dolor, sit amet consectetur adipisicing elit.Voluptate perferendis repudiandae odio odit commodi mollitia temporibus voluptatum ex quas voluptatem.Officia accusamus dolor obcaecati iure esse expedita est ipsum doloribus.'.toLocaleLowerCase()
-// export const engValue = '               lorem'
+// export const engValue = '               Lorem ipsum dolor, sit amet consectetur adipisicing elit.Voluptate perferendis repudiandae odio odit commodi mollitia temporibus voluptatum ex quas voluptatem.Officia accusamus dolor obcaecati iure esse expedita est ipsum doloribus.'.toLocaleLowerCase()
+export const engValue = '               lorem'
 
 export const lessonsArrays = {
   combineArray: [
@@ -100,11 +159,16 @@ export const lessons = ['dfjk', 'asl;', 'vbnm', 'tgyh', 'erui', 'qwop', 'xc,.', 
 
 
 export function getTime(time) {
-  let subbed = new Date(time)
-  let min = subbed.getMinutes().toString().length < 2 ? '0' + subbed.getMinutes() : subbed.getMinutes();
-  let sec = subbed.getSeconds().toString().length < 2 ? '0' + subbed.getSeconds() : subbed.getSeconds();
-  let correct_date = `${min}:${sec}`;
+  let ms, s, m
+  ms = Math.floor(time / 10)
+  s = Math.floor(ms / 60)
+  m = Math.floor(s / 60)
+  if (ms > 60) {
+    ms = ms % 60
+  }
+  if (s > 60) {
+    s = s % 60
+  }
 
-
-  return correct_date
+  return `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s},${ms < 10 ? '0' + ms : ms}`
 } 

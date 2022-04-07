@@ -1,7 +1,7 @@
 import React from "react";
 import { Keyboard } from "./Keyboard";
 import { InputField } from "./InputField";
-import { keyboardArr } from "../../Helpers/utils/utils";
+import { engKeyboardArr, rusKeyboardArr } from "../../Helpers/utils/utils";
 
 export const KeysList = (props) => {
   return (
@@ -15,7 +15,7 @@ export const KeysList = (props) => {
         onKeyDownHandler={props.onKeyDownHandler}
       />
       <br />
-      <Keyboard keysArr={keyboardArr} />
+      <Keyboard keysArr={props.keys} />
     </div>
   );
 };

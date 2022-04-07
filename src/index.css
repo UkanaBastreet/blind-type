@@ -107,10 +107,6 @@ h5 {
   margin-left: 30px;
   justify-content: start;
 }
-.name h2 {
-  cursor: pointer;
-  display: inline;
-}
 .navbar {
   display: flex;
   justify-content: end;
@@ -120,7 +116,9 @@ h5 {
   justify-content: space-around;
   height: 100%;
 }
-.navbarPanel div {
+.navbarPanel .trainig,
+.errors,
+.settings {
   height: 100%;
   padding: 0 10px;
   align-items: center;
@@ -129,9 +127,6 @@ h5 {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-.navbarPanel div:hover {
-  background-color: rgba(0, 0, 0, 0.25);
 }
 /* .settings {
 } */
@@ -236,10 +231,6 @@ h5 {
   border-color: brown;
   background-color: tomato;
 }
-.lessons:hover .lessonsSection {
-  display: block;
-}
-.lessonsSection {
-  display: none;
-  position: absolute;
+.infoButton {
+  margin: 20px;
 }

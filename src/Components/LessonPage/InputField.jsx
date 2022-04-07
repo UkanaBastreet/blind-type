@@ -24,9 +24,6 @@ export const InputField = ({
           onKeyDown={onKeyDownHandler}
           onKeyUp={onKeyUpHandler}
         />
-        <button className="key" onClick={restart}>
-          restart
-        </button>
       </div>
     </div>
   );
