@@ -1,92 +1,71 @@
-import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
-import { Header } from './Components/Header';
-import { Info } from './Components/Info';
-import { LessonPage } from './Components/LessonPage/LessonPage';
-import { Modal } from './Components/Modal';
-import { Button } from './Components/UI/Button/Button';
-import { engKeys, engValue, getTime, keyboardArr, } from './Helpers/utils/utils';
-import { initialState, reducer, setKeys_AC } from './Reducers/LessonCycleReducer';
+import React, { useEffect, useState } from "react";
+import { Header } from "./Components/Header";
+import { Input } from "./Components/Input";
+import { Keyboard } from "./Components/Keyboard";
+import { engKeys,  values } from "./utils/constants";
+import {
+  onKeyDownHandler,
+  onKeyUpHandler,
+  onBlurHandler,
+  highlightRightKey,
+  highlightHandler,
+} from "./utils/handlers";
 
 function App() {
-  Array.prototype.remove = function (value) {
-    delete this[this.indexOf(value)]
-  }
+  const [keys, setKeys] = useState(engKeys);
+  const [value, setValue] = useState(values.startValue);
+  const [valueIndex, setValueIndex] = useState(0);
+  const [isStarted, setIsStarted] = useState(false);
+  // const [isPaused, setIsPaused] = useState(false);
+  // const [errorsCount, setErrorsCount] = useState(0);
 
-  const [state, dispatch] = useReducer(reducer, initialState)
+  useEffect(() => {
+    if (isStarted) {
+      window.onload = window.focus();
+      window.onkeydown = onKeyDownHandler(keys, setKeys, {
+        isStarted,
+        curLet: value[valueIndex],
+        setValueIndex,
+        valueIndex,
+      });
+      window.onkeyup = onKeyUpHandler(setKeys);
+      window.onblur = onBlurHandler(setKeys, {});
+      window.keys = keys;
 
-  console.log(dispatch)
-  const onKeyDown = (e) => {
-    e.preventDefault()
-    let newKeys = state.keys.map(key => {
-      if (key.classList.indexOf(state.isStarted ? 'wrongKey' : 'activeKey') === -1) {
-        if (e.nativeEvent.code === key.code) {
-          if (key.name !== state.value[state.keyIndex]) {
-            if (state.isStarted) {
-              // setErrors(count => count + 1)
-            }
-            // setIsError((state.isStarted && !state.isModal) ? true : false)
-            key.classList.push(state.isStarted ? 'wrongKey' : 'activeKey')
-          } else {
-            key.classList.remove('rightKey')
-            key.classList.remove(state.isStarted ? 'wrongKey' : 'activeKey')
-            key.classList.push('activeKey')
-            if (state.isStarted) {
-              // incrementCount()
-            }
-          }
-        }
-      }
-      return key
-    })
-    dispatch(setKeys_AC(newKeys))
-  }
-  const onKeyUp = (e) => {
-    let newKeys = state.keys.map(key => {
-      // if (e.code === key.code) {
-        key.classList.remove(state.isStarted ? 'wrongKey' : 'activeKey')
-      // }
-      return key
-    })
-    dispatch(setKeys_AC(newKeys))
-  }
+      highlightRightKey(keys, setKeys, value[valueIndex]);
+    } else {
+      setKeys((keys) => {
+        keys["Space"].graylight();
+        return { ...keys };
+      });
+      window.onkeydown = highlightHandler(setKeys, setIsStarted, setValue);
+      window.onkeyup = onKeyUpHandler(setKeys);
+    }
+    const clear = () => () => {
+      window.onkeydown = null;
+      window.onkeyup = null;
+      window.onblur = null;
+      delete window.keys;
+    };
+    if (valueIndex >= value.length || !value[valueIndex]) {
+      setKeys((keys) => {
+        Object.values(keys).forEach((k) => k.lightOff());
+        return { ...keys };
+      });
+      setIsStarted(false);
+      setValue(values.startValue);
+      setValueIndex(0);
+    }
 
-  const setLanguage = (lang) => {
-    console.log(lang)
-  }
+    clear();
+  }, [valueIndex, isStarted]);
+
   return (
-    <div className="App"  >
-      <Header
-        setLanguage={setLanguage}
-      />
-      <Info
-        // isInfo={isInfo}
-        // setIsInfo={setIsInfo}
-        info={state}
-      />
-      {/* {isModal
-        ?
-        <Modal
-          // pause={pause}
-          // unpause={unpause}
-          // isStarted={isStarted}
-          // enteredSymbols={count}
-          // setIsModal={setIsModal}
-          // errors={errors}
-          // time={getTime(time - pauseTime)}
-          // accuracy={(((engValue.length - errors) / engValue.length) * 100).toFixed(2)}
-          // restart={restart}
-        />
-        : */}
-      <LessonPage
-        keys={state.keys}
-        count={state.count}
-        inputValue={state.value}
-        onKeyDownHandler={onKeyDown}
-        onKeyUpHandler={onKeyUp}
-        isError={state.isError}
-      />
-      {/* } */}
-    </div >
+    <div className="App">
+      <Header />
+      <Input value={value.slice(0 + valueIndex, 30 + valueIndex)} />
+      <Keyboard keys={Object.values(keys)} />
+    </div>
   );
 }
 

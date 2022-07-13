@@ -1,9 +1,0 @@
-button.Button {
-  background-color: white;
-  border: 1px solid gray;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button.Button:hover {
-  background-color: whitesmoke;
-}
