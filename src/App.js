@@ -1,72 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { Header } from "./Components/Header";
-import { Input } from "./Components/Input";
-import { Keyboard } from "./Components/Keyboard";
-import { engKeys,  values } from "./utils/constants";
-import {
-  onKeyDownHandler,
-  onKeyUpHandler,
-  onBlurHandler,
-  highlightRightKey,
-  highlightHandler,
-} from "./utils/handlers";
+import { useState } from "react";
+import { Route, Routes, useParams } from "react-router-dom";
+import { LessonsPage } from "./Pages/LessonsPage/LessonsPage";
+import { HomePage } from "./Pages/HomePage";
+import { TrainingPage } from "./Pages/TrainingPage/TrainingPage";
+import { Layout } from "./Components/Layout";
+import { useReducer } from "react";
+import { rootReducer } from "./Redux/rootReducer";
+import { BrowserRouter } from "react-router-dom";
+import { initialState } from "./Redux/InitialState";
 
-function App() {
-  const [keys, setKeys] = useState(engKeys);
-  const [value, setValue] = useState(values.startValue);
-  const [valueIndex, setValueIndex] = useState(0);
-  const [isStarted, setIsStarted] = useState(false);
-  // const [isPaused, setIsPaused] = useState(false);
-  // const [errorsCount, setErrorsCount] = useState(0);
-
-  useEffect(() => {
-    if (isStarted) {
-      window.onload = window.focus();
-      window.onkeydown = onKeyDownHandler(keys, setKeys, {
-        isStarted,
-        curLet: value[valueIndex],
-        setValueIndex,
-        valueIndex,
-      });
-      window.onkeyup = onKeyUpHandler(setKeys);
-      window.onblur = onBlurHandler(setKeys, {});
-      window.keys = keys;
-
-      highlightRightKey(keys, setKeys, value[valueIndex]);
-    } else {
-      setKeys((keys) => {
-        keys["Space"].graylight();
-        return { ...keys };
-      });
-      window.onkeydown = highlightHandler(setKeys, setIsStarted, setValue);
-      window.onkeyup = onKeyUpHandler(setKeys);
-    }
-    const clear = () => () => {
-      window.onkeydown = null;
-      window.onkeyup = null;
-      window.onblur = null;
-      delete window.keys;
-    };
-    if (valueIndex >= value.length || !value[valueIndex]) {
-      setKeys((keys) => {
-        Object.values(keys).forEach((k) => k.lightOff());
-        return { ...keys };
-      });
-      setIsStarted(false);
-      setValue(values.startValue);
-      setValueIndex(0);
-    }
-
-    clear();
-  }, [valueIndex, isStarted]);
+const App = () => {
+  const [theme, setTheme] = useState(true);
+  const [state, dispatch] = useReducer(rootReducer, initialState);
+  // const [language, setLanguage] = useState("ENG");
 
   return (
-    <div className="App">
-      <Header />
-      <Input value={value.slice(0 + valueIndex, 30 + valueIndex)} />
-      <Keyboard keys={Object.values(keys)} />
-    </div>
+    <BrowserRouter>
+      <div className={"App " + (theme ? "white-theme" : "dark-theme")}>
+        <Layout theme={theme} setTheme={setTheme}>
+          <div className="content">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="lessons"
+                element={<LessonsPage lessons={state.lessons} />}
+              />
+              <Route
+                path="lessons/:id"
+                element={
+                  <TrainingPage
+                    dispatch={dispatch}
+                    lessons={state.lessons}
+                    // value={state?.lessons[language][id]}
+                  />
+                }
+              />
+            </Routes>
+          </div>
+        </Layout>
+      </div>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

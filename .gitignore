@@ -24,3 +24,5 @@ yarn-error.log*
 
 # main
 _src_OLD
+src/OldApp.js
+src/todos.txt
