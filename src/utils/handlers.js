@@ -1,73 +1,65 @@
-import { values } from "./constants";
+import { incrementCount_AC, start_AC } from "../Redux/actions"
+import { values } from "./constants"
+import { isCyrillic } from "./functions"
 
-const prevDefArr = ["Tab", "Alt", " ", "ContextMenu"];
+const prevDefArr = ["Tab", "Alt", " ", "ContextMenu", "Escape"]
 
-export function highlightRightKey(keys, setKeys, curLet) {
-  if (!curLet) return;
-  Object.values(keys).forEach((key) => {
-    (key.name === "Shift" && curLet !== curLet.toLowerCase()) ||
-    key.name === curLet.toLowerCase()
-      ? key.graylight()
-      : key.lightOff();
-  });
-
-  setKeys({ ...keys });
-}
-
-export function onKeyDownHandler(
-  keys,
+export function downHandler(
+  event,
   setKeys,
-  { isStarted, curLet, setValueIndex, valueIndex }
+  currentChar,
+  setIndex,
+  charHandler,
+  errorHandler
 ) {
-  return (event) => {
-    if (!isStarted || !curLet) return;
-    if (prevDefArr.indexOf(event.key) !== -1) {
-      event.preventDefault();
+  setKeys((keys) => {
+    if (!keys.hasOwnProperty(event.code)) return { ...keys }
+    if (prevDefArr.includes(event.key)) event.preventDefault()
+    isCyrillic(event.key) &&
+      alert(`Switch yor keyboard language \n Press "Space" to return `)
+    //
+    if (currentChar !== currentChar.toLowerCase() && event.key === "Shift") {
+      keys[event.code].bluelight()
     }
-    if (curLet !== curLet.toLowerCase() && event.key === "Shift") {
-      keys[event.code].bluelight();
+    if (event.key === currentChar) {
+      keys[event.code].bluelight()
+      charHandler(currentChar)
+      setIndex((i) => i + 1)
+    } else {
+      keys[event.code].redlight()
+      event.code !== "Shift" && errorHandler(event.key, currentChar)
     }
-    keys[event.code][event.key === curLet ? "bluelight" : "redlight"]();
-    if (event.key === curLet) {
-      setValueIndex(++valueIndex);
-    }
-    setKeys({ ...keys });
-  };
+    return { ...keys }
+  })  
 }
-
-export function onKeyUpHandler(setKeys) {
-  return (event) => {
-    setKeys((keys) => {
-      keys[event.code] && keys[event.code].blueOff().redOff();
-      return { ...keys };
-    });
-  };
+export function upHandler(event, setKeys) {
+  setKeys((keys) => {
+    if (!keys.hasOwnProperty(event.code)) return keys
+    keys[event.code].redOff()
+    keys[event.code].blueOff()
+    return { ...keys }
+  })
 }
-
-export function onBlurHandler(setKeys) {
-  return () => {
-    setKeys((keys) => {
-      for (const key in keys) {
-        if (Object.hasOwnProperty.call(keys, key)) {
-          keys[key].blueOff().redOff();
-        }
+export function rightKeyHandler(keys, setKeys, currentChar = "g") {
+  Object.values(keys).forEach((key) => key.grayOff())
+  Object.values(keys).forEach((key) => {
+    if (key.name === currentChar.toLowerCase()) {
+      key.graylight()
+      if (currentChar !== currentChar.toLowerCase()) {
+        key.shiftSide && keys[key.shiftSide].graylight()
       }
-      return { ...keys };
-    });
-  };
+    }
+  })
+  setKeys({ ...keys })
 }
-export function highlightHandler(setKeys, setIsStarted, setValue) {
-  return (event) => {
-    if (prevDefArr.indexOf(event.key) !== -1) {
-      event.preventDefault();
+export function blurHandler(setKeys) {
+  setKeys((keys) => {
+    for (const key in keys) {
+      if (Object.hasOwnProperty.call(keys, key)) {
+        keys[key].blueOff()
+        keys[key].redOff()
+      }
     }
-    setKeys((keys) => {
-      keys[event.code]?.bluelight();
-      return {...keys}
-    });
-    if (event.key === " ") {
-      setIsStarted((is) => !is);
-      setValue(values.value);
-    }
-  };
+    return { ...keys }
+  })
 }

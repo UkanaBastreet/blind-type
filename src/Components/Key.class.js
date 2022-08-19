@@ -1,70 +1,64 @@
 export class KeyC {
   constructor(params) {
     Object.keys(params).forEach((key) => {
-      this[key] = params[key];
-    });
-    this.isRightKey = false;
-  }
-  click(isStarted) {
-    if (isStarted) {
-      if (this.isRightKey) {
-        this.bluelight();
-      } else {
-        this.redlight();
-      }
-    } else {
-      this.graylight();
+      this[key] = params[key]
+    })
+    if (leftHandKeys.includes(params.id)) {
+      this.shiftSide = "ShiftRight"
+      this.handSide = "Left"
+    } else if (rightHandKeys.includes(params.id)) {
+      this.shiftSide = "ShiftLeft"
+      this.handSide = "Right"
     }
-  }
-  switchIsRightKey(isRight) {
-    if (isRight) {
-      this.graylight();
-    } else {
-      this.grayOff();
-    }
-    this.isRightKey = isRight;
   }
   bluelight() {
-    if (this.classList.indexOf("activeKey") === -1) {
-      this.classList.push("activeKey");
+    if (!this.classList.includes("activeKey")) {
+      this.classList.push("activeKey")
     }
-    return this;
   }
   redlight() {
-    if (this.classList.indexOf("wrongKey") === -1) {
-      this.classList.push("wrongKey");
+    if (!this.classList.includes("wrongKey")) {
+      this.classList.push("wrongKey")
     }
-    return this;
   }
   graylight() {
-    if (this.classList.indexOf("rightKey") === -1) {
-      this.classList.push("rightKey");
+    if (!this.classList.includes("rightKey")) {
+      this.classList.push("rightKey")
     }
-    return this;
   }
-  blueOff() {
-    this.classList = remove(this.classList, "activeKey");
-    return this;
+  blueOff(className = "activeKey") {
+    if (this.classList.includes(className)) {
+      this.classList = remove(this.classList, className)
+    }
   }
-  redOff() {
-    this.classList = remove(this.classList, "wrongKey");
-    return this;
+  redOff(className = "wrongKey") {
+    if (this.classList.includes(className)) {
+      this.classList = remove(this.classList, className)
+    }
   }
-  grayOff() {
-    this.classList = remove(this.classList, "rightKey");
-    return this;
+  grayOff(className = "rightKey") {
+    if (this.classList.includes(className)) {
+      this.classList = remove(this.classList, className)
+    }
   }
   lightOff() {
-    this.classList = remove(this.classList, "rightKey");
-    this.classList = remove(this.classList, "wrongKey");
-    this.classList = remove(this.classList, "activeKey");
-    return this;
+    this.classList = remove(this.classList, "rightKey")
+    this.classList = remove(this.classList, "wrongKey")
+    this.classList = remove(this.classList, "activeKey")
   }
 }
 function remove(arr, value) {
-  let index = arr.indexOf(value);
+  let index = arr.indexOf(value)
   if (index > -1) {
-    arr.splice(index, 1);
+    arr.splice(index, 1)
   }
-  return arr;
+  return arr
 }
+const leftHandKeys = [
+  0, 1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 29, 30, 31, 32, 33, 42, 43, 44, 45,
+  46,
+]
+const rightHandKeys = [
+  7, 8, 9, 10, 11, 12, 20, 21, 22, 23, 24, 25, 26, 34, 35, 36, 37, 38, 39, 47,
+  48, 49, 50, 51,
+]
