@@ -27,7 +27,7 @@ export const TrainingPage = ({ lessons, dispatch, ...props }) => {
   const [errors, setErrors] = useState([])
   const [chars, setChars] = useState([])
 
-  const [keys, setKeys] = useState({ ...engKeys })
+  const [keys, setKeys] = useState(engKeys)
 
   let value = isRunning && !isEnded ? lessons[id].value : startValue
   let currentChar = isRunning && index < value.length ? value[index] : " "
@@ -49,7 +49,7 @@ export const TrainingPage = ({ lessons, dispatch, ...props }) => {
     setIsRunning(true)
     setIsModal(false)
   }
-  function repeat() {
+  function restart() {
     setIsRunning(false)
     setIsEnded(false)
 
@@ -101,7 +101,12 @@ export const TrainingPage = ({ lessons, dispatch, ...props }) => {
     }
     setChars((chars) => [...chars, char])
   }
-
+  useEffect(() => {
+    setKeys((keys) => {
+      Object.values(keys).forEach((key) => key.lightOff())
+      return { ...keys }
+    })
+  }, [])
   useEffect(() => {
     window.keys = keys
     if (index >= value.length) {
@@ -145,10 +150,22 @@ export const TrainingPage = ({ lessons, dispatch, ...props }) => {
     }
     // [ === ENDED === ]
     if (isEnded) {
+      window.onkeydown = (event) => {
+        if (event.code === "Escape") {
+          exit()
+        }
+        if (event.code === "Enter" && event.ctrlKey) {
+          restart()
+        }
+      }
     }
 
     return () => {
       removeEventHandlers()
+      // setKeys((keys) => {
+      //   Object.values(keys).forEach((key) => key.lightOff())
+      //   return { ...keys }
+      // })
     }
   }, [index, isEnded, isRunning, isModal])
 
@@ -156,8 +173,9 @@ export const TrainingPage = ({ lessons, dispatch, ...props }) => {
     <div className="training-page">
       {isModal ? (
         <Modal
+          isEnded={isEnded}
           exit={exit}
-          repeat={repeat}
+          restart={restart}
           unpause={!isEnded && unpause}
           info={{
             accuracy: Math.floor((index - errors.length) / index) * 100,
