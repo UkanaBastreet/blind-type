@@ -1,17 +1,12 @@
 import React, { useEffect } from "react"
 import { Button } from "../UI/Button/Button"
 
-export const Modal = ({
-  unpause,
-  repeat,
-  exit,
-  info
-}) => {
+export const Modal = ({ isEnded, unpause, repeat, exit, info }) => {
   const setModalHandler = (event) => {
     event.stopPropagation()
     event.preventDefault()
     if (unpause && event.target.className === "modal-overlay") {
-      unpause((prev) => !prev)
+      isEnded ? exit() : unpause((prev) => !prev)
     }
   }
   return (

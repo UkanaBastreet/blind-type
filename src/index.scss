@@ -97,8 +97,8 @@ body {
       margin: 20px;
       display: flex;
       justify-content: center;
-      max-width: 60%;
-      @media (max-width: 800px) {
+      width: 900px;
+      @media (max-width: 950px) {
         min-width: 100%;
       }
       background-color: var(--background-color);
@@ -150,10 +150,12 @@ body {
               display: inline-block;
             }
             .completed-text{
+              overflow: hidden;
               text-align: end;
               min-width: 50%;
             }
             .current-text{
+              overflow: hidden;
               text-align: start;
               min-width: 50%;
 
