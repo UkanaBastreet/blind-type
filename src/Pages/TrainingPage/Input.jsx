@@ -1,43 +1,38 @@
 import React from "react"
-import { startValue } from "../../utils/constants"
 
-export const Input = React.memo(({ value, index, ...props }) => {
+export const Input = React.memo(({ fetching, value, index, ...props }) => {
+  // let start = index !== null && index < 15 ? 0 : index - 15
+  // let count = index !== null && index < 15 ? 15 + index : 30
+  value =
+    index === null
+      ? value
+      : "                    " + value + "                    "
+  value = index === null ? value : value.split("").splice(0 + index, 40)
   return (
     <div className="input">
       <span className="input__input-field">
         <div className="input__input-text">
           {index === null ? (
-            startValue
+            <div className="startValue">{value}</div>
           ) : (
             <>
-              <div className="input__input-field__overlay"></div>
-              <span className="completed-text">
-                {value
-                  .split("")
-                  .splice(0, index)
-                  .reverse()
-                  .splice(0, 15)
-                  .reverse()
-                  .map((char, index) => {
-                    return (
-                      <div key={index} className="char">
-                        {char}
-                      </div>
-                    )
-                  })}
-              </span>
-              <span className="current-text">
-                {value
-                  .split("")
-                  .splice(index, 15)
-                  .map((char, index) => {
-                    return (
-                      <div key={index} className="char">
-                        {char}
-                      </div>
-                    )
-                  })}
-              </span>
+              <div className="value dark">
+                {value.splice(0, 20).map((char, i) => (
+                  <div key={i} className="char">
+                    {/* {char === " " ? "_" : char} */}
+                    {char}
+                  </div>
+                ))}
+              </div>
+              <div className="value">
+                {value.splice(0, 20).map((char, i) => (
+                  <div key={i * 2} className="char">
+                    {/* {char === " " ? "_" : char} */}
+                    {char}
+                  </div>
+                ))}
+              </div>
+              <span className="slide"></span>
             </>
           )}
         </div>

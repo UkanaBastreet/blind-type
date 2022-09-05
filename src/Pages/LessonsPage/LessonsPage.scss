@@ -1,0 +1,66 @@
+@import url("../../styles/themes.scss");
+
+.lessons-page {
+  position: relative;
+  // margin: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 1000px;
+  padding-bottom: 50px;
+  .lessons-navbar {
+    position: absolute;
+    left: 0;
+    width: 10%;
+    .lessons-navbar__item {
+    }
+  }
+  .lessons-lists {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .lessons-list {
+      margin-top: 30px;
+      position: relative;
+      h2 {
+        left: -10%;
+        top: 10px;
+        position: absolute;
+        align-self: flex-start;
+      }
+      .list {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        row-gap: 20px;
+        column-gap: 10px;
+        .lessons-list__item {
+          font-weight: 100;
+          font-size: 17px;
+          width: 170px;
+          text-align: center;
+          min-height: 220px;
+          min-width: 20%;
+          padding: 20px 10px;
+          border-radius: 5px;
+          flex-wrap: wrap;
+          color: var(--header_text-color);
+          background-color: var(--header_bg-color);
+          // border: var(--right-key_border);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .list-title:hover {
+            text-decoration: underline;
+          }
+          p {
+            font-size: 20px;
+            letter-spacing: 3px;
+          }
+        }
+      }
+    }
+  }
+}

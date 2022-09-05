@@ -24,5 +24,9 @@ yarn-error.log*
 
 # main
 _src_OLD
+src/UI
+src/UI/Button
+
 src/OldApp.js
-src/todos.txt
+src/todos.txt 
+src/testdir

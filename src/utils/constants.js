@@ -1,4 +1,5 @@
-import { KeyC } from "../Components/Key.class"
+import { KeyC } from "../Classes/Key.class"
+import { leftHandChars, rightHandChars, words } from "./words"
 
 export const engKeysArr = [
   "Backquote",
@@ -137,25 +138,36 @@ export const values = {
 
 export const lessons = {
   ENG: [
-    {
-      id: 0,
-      lesson: "fd jk",
-      value: "ffjj ddkk fdjk ffdd jjkk djkf kfdj jjkf ddkf",
-    },
-    { id: 1, lesson: "as l;", value: "First Lorem" },
-    { id: 2, lesson: "vb nm", value: "Second Lorem" },
-    { id: 3, lesson: "tg yh", value: "Third Lorem" },
-    { id: 4, lesson: "er ui", value: "Fourth Lorem" },
-    { id: 5, lesson: "qw op", value: "Fifth Lorem" },
-    { id: 6, lesson: "xc ,.", value: "Sixth Lorem" },
-    { id: 7, lesson: "z /", value: "Seventh Lorem" },
+    { id: 0, type: "fd jk" },
+    { id: 1, type: "as l;" },
+    { id: 2, type: "vb nm" },
+    { id: 3, type: "tg yh" },
+    { id: 4, type: "er ui" },
+    { id: 5, type: "qw op" },
+    { id: 6, type: "xc ,." },
+    { id: 7, type: "z /" },
     {
       id: 8,
-      lesson: "Training",
+      type: "Lorem",
       value:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, voluptatem?",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos doloribus totam maiores. Eaque molestias quaerat rem laudantium assumenda, commodi doloremque placeat reiciendis unde voluptatibus, vitae ipsum veritatis accusamus? Assumenda, atque!",
     },
+    { id: 9, type: "Left_Hand", value: leftHandChars.join(" ") },
+    { id: 10, type: "Rigth_Hand", value: rightHandChars.join(" ") },
+    { id: 11, type: "100_words", value: words.splice(0, 100).join(" ") },
   ],
-  RUS: [{ lesson: "" }],
+  RUS: [
+    { id: 0, type: "ав ол" },
+    { id: 1, type: "ыф дж" },
+    { id: 2, type: "ми ть" },
+    { id: 3, type: "ек нг" },
+    { id: 4, type: "ук гш" },
+    { id: 5, type: "йц щзхъ" },
+    { id: 6, type: "чс бю" },
+    { id: 7, type: "я ." },
+  ],
 }
-export const startValue = 'Press "Space" to start...'
+export const startValue = {
+  ENG: 'Press "Space" to start...',
+  RUS: 'Нажмите "Пробел", чтобы начать...',
+}

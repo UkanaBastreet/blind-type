@@ -1,13 +1,12 @@
 import React from "react"
 import { Link, NavLink } from "react-router-dom"
 
-export const Header = ({ theme, setTheme }) => {
+export const Header = ({ theme, setTheme,  }) => {
   return (
     <div className="header">
       <Link to={"/"}>
         <span className="header__title">
           <h1>Blind Type </h1>
-          <small> 2.0 Reborn</small>
         </span>
       </Link>
 

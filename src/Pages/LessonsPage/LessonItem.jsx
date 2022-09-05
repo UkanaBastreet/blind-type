@@ -1,18 +1,20 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from "react"
+import { NavLink } from "react-router-dom"
 
-export const LessonItem = ({ id, lesson, gamesCount = 0, info = {} }) => {
+export const LessonItem = ({ id, type, gamesCount = 0, info = {} }) => {
   return (
-    <div className="lessons-list__item">
-      <NavLink to={`/lessons/${id}`}>
+    <NavLink to={`/lessons/${id}`}>
+      <div className="lessons-list__item">
         <header>
-          <h2>
-            {lesson}
-          </h2>
+          <p>{type}</p>
         </header>
-        <main>{gamesCount}</main>
-        <footer>{gamesCount}</footer>
-      </NavLink>
-    </div>
-  );
-};
+        <main>
+          <div>Games : {gamesCount}</div>
+          <div>Accuracy: {gamesCount}</div>
+          <div>WPM: 0</div>
+        </main>
+        <footer> </footer>
+      </div>
+    </NavLink>
+  )
+}

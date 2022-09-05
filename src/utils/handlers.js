@@ -1,5 +1,3 @@
-import { incrementCount_AC, start_AC } from "../Redux/actions"
-import { values } from "./constants"
 import { isCyrillic } from "./functions"
 
 const prevDefArr = ["Tab", "Alt", " ", "ContextMenu", "Escape"]
