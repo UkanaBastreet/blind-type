@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, NavLink } from "react-router-dom"
 
-export const Header = ({ theme, setTheme,  }) => {
+export const Header = ({ theme, setTheme }) => {
   return (
     <div className="header">
       <Link to={"/"}>
@@ -10,12 +10,12 @@ export const Header = ({ theme, setTheme,  }) => {
         </span>
       </Link>
 
-      <span className="header__lesson-type">
-        <NavLink to={"/lessons"}>Lessons</NavLink>
-      </span>
+      <NavLink to={"/lessons"}>
+        <span className="header__lesson-type">Lessons</span>
+      </NavLink>
 
       <span className="header__navbar">
-        <span>Sign In</span>
+        {/* <span>Sign In</span> */}
         <span
           onClick={() => setTheme((theme) => !theme)}
           className="theme-icon"

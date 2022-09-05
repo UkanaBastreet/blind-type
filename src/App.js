@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Route, Routes, useParams } from "react-router-dom"
+import { Route, Routes,  } from "react-router-dom"
 import { LessonsPage } from "./Pages/LessonsPage/LessonsPage"
 import { HomePage } from "./Pages/HomePage/HomePage"
 import { TrainingPage } from "./Pages/TrainingPage/TrainingPage"

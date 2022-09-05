@@ -1,5 +1,5 @@
 // @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500&display=swap");
 @import url("styles/variables.css");
 @import url("styles/themes.scss");
 
@@ -42,8 +42,7 @@ body {
         display: inline-block;
       }
     }
-    &__lesson-type {
-    }
+    // &__lesson-type {    }
     &__navbar {
       display: flex;
       justify-content: space-evenly;
@@ -76,8 +75,6 @@ body {
     min-height: calc(100vh - 50px);
     // max-height: calc(100% - 500px);
     // height: 710px;
-    .home-page {
-    }
   }
 }
 a {

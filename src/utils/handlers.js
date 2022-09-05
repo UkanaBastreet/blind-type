@@ -1,4 +1,4 @@
-import { isCyrillic } from "./functions"
+// import { isCyrillic } from "./functions"
 
 const prevDefArr = ["Tab", "Alt", " ", "ContextMenu", "Escape"]
 
@@ -13,8 +13,7 @@ export function downHandler(
   setKeys((keys) => {
     if (!keys.hasOwnProperty(event.code)) return { ...keys }
     if (prevDefArr.includes(event.key)) event.preventDefault()
-    isCyrillic(event.key) &&
-      alert(`Switch yor keyboard language \n Press "Space" to return `)
+    // isCyrillic(event.key) && alert(`Switch yor keyboard language \n Press "Space" to return `)
     //
     if (currentChar !== currentChar.toLowerCase() && event.key === "Shift") {
       keys[event.code].bluelight()
@@ -28,7 +27,7 @@ export function downHandler(
       event.code !== "Shift" && errorHandler(event.key, currentChar)
     }
     return { ...keys }
-  })  
+  })
 }
 export function upHandler(event, setKeys) {
   setKeys((keys) => {

@@ -11,12 +11,7 @@ import {
   upHandler,
 } from "../../utils/handlers"
 import { pushNewGame_AC } from "../../Redux/actions"
-import {
-  createValue,
-  receiveValue,
-  removeEventHandlers,
-} from "../../utils/functions"
-import { useValue } from "../../hooks/useValue"
+import { receiveValue, removeEventHandlers } from "../../utils/functions"
 import "./TrainingPage.scss"
 
 export const TrainingPage = ({ lessons, dispatch, language, ...props }) => {

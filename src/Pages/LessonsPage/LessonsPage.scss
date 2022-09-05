@@ -12,8 +12,7 @@
     position: absolute;
     left: 0;
     width: 10%;
-    .lessons-navbar__item {
-    }
+    // .lessons-navbar__item {    }
   }
   .lessons-lists {
     width: 75%;
@@ -32,12 +31,12 @@
       .list {
         margin-top: 10px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         flex-wrap: wrap;
         row-gap: 20px;
         column-gap: 10px;
         .lessons-list__item {
-          font-weight: 100;
+          font-weight: 400;
           font-size: 17px;
           width: 170px;
           text-align: center;

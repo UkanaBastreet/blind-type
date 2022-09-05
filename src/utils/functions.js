@@ -39,7 +39,7 @@ export function receiveValue(type, lang, id) {
   if (type.split(" ").length === 1) {
     console.log(lessons[lang].find((l) => l.id === id))
     let arr = lessons[lang].find((l) => +l.id === +id).value
-    return shuffle(arr.split(' ')).join(' ')
+    return shuffle(arr.split(" ")).join(" ")
   } else {
     return createValue(type.split(" ").join(""))
   }
@@ -67,7 +67,7 @@ function shuffle(array) {
   let currentIndex = array.length,
     randomIndex
   // While there remain elements to shuffle.
-  while (currentIndex != 0) {
+  while (+currentIndex !== 0) {
     // Pick a remaining element.
     randomIndex = Math.floor(Math.random() * currentIndex)
     currentIndex--
@@ -78,4 +78,4 @@ function shuffle(array) {
     ]
   }
   return array
-}
+} // yeah,  it's stolen
