@@ -20,14 +20,14 @@ export const LessonsPage = ({ lessons }) => {
           </div>
         </div>
 
-        <div className="lessons-list">
+        {/* <div className="lessons-list">
           <h2 className="list-title">RUS</h2>
           <div className="list">
             {lessons.RUS.map((lesson) => (
               <LessonItem {...lesson} key={lesson.id + "rus"} />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

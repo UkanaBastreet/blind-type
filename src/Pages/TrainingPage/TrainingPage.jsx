@@ -138,7 +138,7 @@ export const TrainingPage = ({ lessons, dispatch, language, ...props }) => {
     // [ === RUNNIG === ]
     if (isRunning) {
       if (value === startValue[language]) {
-        setValue(receiveValue(lessons[id].type, language, id))
+        setValue(receiveValue(lessons[language][id].type, language, id))
       }
       timer = setInterval(() => {
         setTime((t) => ++t)

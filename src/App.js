@@ -33,7 +33,7 @@ const App = () => {
               path="lessons/:id"
               element={
                 <TrainingPage
-                  lessons={state.lessons[language]}
+                  lessons={state.lessons}
                   dispatch={dispatch}
                   language={language}
                 />
