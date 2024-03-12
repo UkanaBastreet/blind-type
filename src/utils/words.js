@@ -1112,4 +1112,3 @@ export const leftHandChars = [
   "feed",
   "seat",
 ]
-

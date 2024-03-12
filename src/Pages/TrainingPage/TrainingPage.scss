@@ -2,15 +2,10 @@
 
 .training-page {
   .modal {
-    // margin-top: 100px;
-    // position: relative;
-    // top: 10%;
-    // left: 25%;
     height: 450px;
     width: 700px;
     background-color: var(--background-color);
     color: var(--text-color);
-    // border: 1px solid var(--gray-light);
     border-radius: 10px;
     padding: 20px 50px;
     div {
@@ -18,19 +13,16 @@
       border-radius: 10px;
     }
     .modal-header {
-      // height: 25%;
       text-align: center;
       .info {
         div {
           display: flex;
           flex-direction: column;
-          align-items: start;
+          align-items: flex-start;
           justify-content: center;
         }
         padding: 10px;
         .info-item {
-          // width: 90px;
-          // height: 50px;
           padding: 5px;
           border: 1px solid var(--gray-light);
           border-radius: 5px;
@@ -47,7 +39,6 @@
       justify-content: center;
       align-items: center;
       background-color: var(--gray-dark);
-      // height: 65%;
     }
     .modal-footer {
       margin-top: 20px;
@@ -59,7 +50,7 @@
       height: 10%;
       span {
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         gap: 20px;
       }
@@ -76,8 +67,6 @@
       text-align: center;
       width: 80%;
       padding: 10px;
-      // border: 2px solid gray;
-      // border-radius: 10px;
       border-bottom: 2px solid var(--key_text-color);
       font-size: 26px;
       .input__input-text {
@@ -96,7 +85,7 @@
         .value {
           color: var(--right-key_text-color);
           display: flex;
-          justify-content: start;
+          justify-content: flex-start;
           white-space: pre;
           width: 50%;
           text-align: center;
@@ -104,7 +93,7 @@
         }
         .dark {
           display: flex;
-          justify-content: end;
+          justify-content: flex-end;
           color: var(--key_text-color);
         }
         .char {
@@ -191,8 +180,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    // width: 50%;
-    // height: 50%;
     display: flex;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.8);

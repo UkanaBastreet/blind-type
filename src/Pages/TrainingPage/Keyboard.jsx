@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Key } from "./Key"
 
 export const Keyboard = ({ keys, ...props }) => {

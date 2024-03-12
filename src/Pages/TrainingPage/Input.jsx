@@ -1,8 +1,6 @@
 import React from "react"
 
 export const Input = React.memo(({ fetching, value, index, ...props }) => {
-  // let start = index !== null && index < 15 ? 0 : index - 15
-  // let count = index !== null && index < 15 ? 15 + index : 30
   value =
     index === null
       ? value
