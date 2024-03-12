@@ -1,6 +1,6 @@
 import React from "react"
 
-export const Input = React.memo(({ fetching, value, index, ...props }) => {
+export const InputField = React.memo(({ fetching, value, index, ...props }) => {
   value =
     index === null
       ? value

@@ -1,7 +1,7 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
-import { Button } from "../../UI/Button/Button"
-import "./HomePage.scss"
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Button } from "../../UI/Button/Button";
+import "./HomePage.scss";
 
 export const HomePage = () => {
   return (
@@ -9,7 +9,10 @@ export const HomePage = () => {
       <div className="title">
         <h1>
           Take a Typing Test,
-          <br /> learn blind typing and improve <br /> your Typing Skills
+          <br />
+          learn blind typing and improve
+          <br />
+          your Typing Skills
         </h1>
         <hr />
         <p>Learn touch typing and increase your productivity</p>
@@ -27,5 +30,5 @@ export const HomePage = () => {
         </NavLink>
       </div>
     </div>
-  )
-}
+  );
+};

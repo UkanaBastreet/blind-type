@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Input } from "./Input"
+import { InputField } from "./InputField"
 import { Keyboard } from "./Keyboard"
 import { Modal } from "../../Components/Modal/Modal"
 import { useNavigate, useParams } from "react-router-dom"
@@ -16,7 +16,6 @@ import "./TrainingPage.scss"
 
 export const TrainingPage = ({ lessons, dispatch, language, ...props }) => {
   const { id } = useParams()
-  // const [fetch, loading] = useValue()
 
   const [value, setValue] = useState(startValue[language])
 
@@ -33,7 +32,6 @@ export const TrainingPage = ({ lessons, dispatch, language, ...props }) => {
 
   const [keys, setKeys] = useState(engKeys)
 
-  // let value = isRunning && !isEnded ? lessons[id].value : startValue
   let currentChar = isRunning && index < value.length ? value[index] : " "
   let accuracy = (index - errors.length) / index
 
@@ -218,7 +216,7 @@ export const TrainingPage = ({ lessons, dispatch, language, ...props }) => {
         />
       ) : (
         <>
-          <Input value={value} index={index} />
+          <InputField value={value} index={index} />
           <Keyboard keys={Object.values(keys)} />
         </>
       )}
