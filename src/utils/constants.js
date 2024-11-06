@@ -153,7 +153,7 @@ export const lessons = {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos doloribus totam maiores. Eaque molestias quaerat rem laudantium assumenda, commodi doloremque placeat reiciendis unde voluptatibus, vitae ipsum veritatis accusamus? Assumenda, atque!",
     },
     { id: 9, type: "Left_Hand", value: leftHandChars.join(" ") },
-    { id: 10, type: "Rigth_Hand", value: rightHandChars.join(" ") },
+    { id: 10, type: "Right_Hand", value: rightHandChars.join(" ") },
     { id: 11, type: "100_words", value: words.splice(0, 100).join(" ") },
   ],
   RUS: [

@@ -1,11 +1,11 @@
-import React from "react"
+import React from "react";
 
 export const InputField = React.memo(({ fetching, value, index, ...props }) => {
   value =
     index === null
       ? value
-      : "                    " + value + "                    "
-  value = index === null ? value : value.split("").splice(0 + index, 40)
+      : "                    " + value + "                    ";
+  value = index === null ? value : value.split("").splice(0 + index, 40);
   return (
     <div className="input">
       <span className="input__input-field">
@@ -17,7 +17,6 @@ export const InputField = React.memo(({ fetching, value, index, ...props }) => {
               <div className="value dark">
                 {value.splice(0, 20).map((char, i) => (
                   <div key={i} className="char">
-                    {/* {char === " " ? "_" : char} */}
                     {char}
                   </div>
                 ))}
@@ -25,16 +24,15 @@ export const InputField = React.memo(({ fetching, value, index, ...props }) => {
               <div className="value">
                 {value.splice(0, 20).map((char, i) => (
                   <div key={i * 2} className="char">
-                    {/* {char === " " ? "_" : char} */}
                     {char}
                   </div>
                 ))}
               </div>
-              <span className="slide"></span>
+              <span className="slide" />
             </>
           )}
         </div>
       </span>
     </div>
-  )
-})
+  );
+});
