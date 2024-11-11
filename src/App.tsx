@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {
+  FocusEventHandler,
+  KeyboardEventHandler,
+  useState,
+} from "react";
+import "./App.css";
+import { lorem } from "./constants.ts";
 
 function App() {
+  const [index, setIndex] = useState(0);
+
+  const onkeydownHandler: KeyboardEventHandler = (e) => {
+    const key = e.key;
+    if (key === lorem[index]) {
+      setIndex((prevIndex) => prevIndex + 1);
+    }
+    if(key==='Backspace'){
+      setIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+  const onblurHandler: FocusEventHandler = (e) => {
+    console.log("e : ", e.type);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div
+        onBlur={onblurHandler}
+        onFocus={onblurHandler}
+        onKeyDown={onkeydownHandler}
+        tabIndex={0}
+        className="GameField"
+      >
+        <span className="GameField_block visible" >{lorem.slice(0, index)}</span>
+        <span className="GameField_block" style={{ color: "gray" }}>
+          {lorem.slice(index, lorem.length - 1)}
+        </span>
+      </div>
     </div>
   );
 }

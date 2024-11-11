@@ -1,38 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body,
+#root,
 .App {
-  text-align: center;
+  height: 100%;
+  width: 100%;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  align-items: center;
+  padding-bottom: 10%;
 
-.App-link {
-  color: #61dafb;
+  font-family: "Roboto", serif;
+  font-size: 24px;
+  color: #ddd;
+  text-align: center;
+  background-color: #181818;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.GameField {
+  text-align: start;
+  transition: 0.2s;
+  outline: none;
+  letter-spacing: 2px;
+  word-spacing: 4px;
+}
+.GameField:not(:focus) {
+  filter: blur(5px);
+}
+.GameField_block.visible {
+  position: relative;
+}
+.GameField_block.visible::after {
+  content: ""; /* Псевдоэлемент без текста */
+  position: absolute; /* Абсолютное позиционирование */
+  width: 3px; /* Ширина каретки */
+  height: 24px; /* Высота каретки */
+  background-color: #ddd; /* Цвет каретки */
+  animation: blink 1.2s step-end infinite; /* Анимация мигания */
+  right: 0; /* Позиция каретки справа */
+  bottom: 0; /* Позиция каретки сверху */
+  transition: .2s;
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1; /* Полная видимость */
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    opacity: 0; /* Полная прозрачность */
   }
 }
