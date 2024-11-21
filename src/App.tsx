@@ -19,6 +19,7 @@ function App() {
     const key = e.key;
     if (key === lorem[index]) {
       setIndex((prevIndex) => prevIndex + 1);
+      setPlaying(true);
     } else {
       if (key === "Backspace") {
         setIndex((prevIndex) => prevIndex - 1);
@@ -26,14 +27,13 @@ function App() {
       if (key === "Escape") {
         if (fieldRef.current) {
           const cur = fieldRef.current as HTMLDivElement;
-          cur!.blur();
+          cur.blur();
         }
       }
       key.length === 1 && setErrors((err) => err + 1);
     }
   };
   const onblurHandler: FocusEventHandler = (e) => {
-    console.log("e : ", e.type);
     if ((e.type = "focus")) {
       setPlaying(true);
     } else {
@@ -41,10 +41,15 @@ function App() {
     }
   };
   useEffect(() => {
-    const timerInterval = setInterval(() => {
-      setTime((prevTime) => prevTime + 1);
-    }, 1);
+    let timerInterval;
+    if (playing) {
+      timerInterval = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+      }, 100);
+    }
     return () => {
+      console.log("clear");
+
       clearInterval(timerInterval);
     };
   }, [playing]);
@@ -60,10 +65,8 @@ function App() {
           onFocus={onblurHandler}
           onKeyDown={onkeydownHandler}
         >
-          <span className="GameField_block visible">
-            {lorem.slice(0, index)}
-          </span>
-          <span className="GameField_block" style={{ color: "gray" }}>
+          <span className="GameField_block done">{lorem.slice(0, index)}</span>
+          <span className="GameField_block">
             {lorem.slice(index, lorem.length - 1)}
           </span>
         </div>

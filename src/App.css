@@ -24,35 +24,39 @@ body,
   text-align: center;
   background-color: #181818;
 }
-.GameField {
+.text_field {
+  outline: none;
   text-align: start;
+  text-wrap: wrap;
+  padding: 0.5rem 2rem;
+}
+.GameField {
   transition: 0.2s;
   outline: none;
   letter-spacing: 2px;
   word-spacing: 4px;
   position: relative;
+  color: #555;
 }
 .GameField:not(:focus-within) {
   filter: blur(5px);
+  cursor: pointer;
 }
-.GameField_block.visible {
+.GameField_block.done {
+  color: white;
   position: relative;
   bottom: 0;
   left: 0;
 }
-.GameField_block.visible::after {
-  position: absolute; /* Абсолютное позиционирование */
-  right: 0; /* Позиция каретки справа */
-  bottom: 0; /* Позиция каретки сверху */
-
-  content: ""; /* Псевдоэлемент без текста */
-
-  width: 3px; /* Ширина каретки */
-  height: 24px; /* Высота каретки */
-
-  background-color: #ddd; /* Цвет каретки */
-
-  animation: blink 1.2s step-end infinite; /* Анимация мигания */
+.GameField_block.done::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  content: "";
+  width: 3px;
+  height: 24px;
+  background-color: #ccc;
+  animation: blink 1.2s step-end infinite;
   transition: 0.2s;
 }
 @keyframes blink {
