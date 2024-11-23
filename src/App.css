@@ -62,12 +62,18 @@ body,
 @keyframes blink {
   0%,
   100% {
-    opacity: 1; /* Полная видимость */
+    opacity: 1;
   }
   50% {
-    opacity: 0; /* Полная прозрачность */
+    opacity: 0;
   }
 }
 .stats {
   padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.stats > .errors {
+  color: tomato;
 }
