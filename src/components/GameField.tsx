@@ -18,12 +18,17 @@ const GameField: FC = () => {
 
   const onkeydownHandler: KeyboardEventHandler = (e) => {
     const key = e.key;
+    if (index === lorem.length) {
+      setPlaying(false);
+    }
     if (key === lorem[index]) {
       setIndex((prevIndex) => prevIndex + 1);
       setPlaying(true);
     } else {
       if (key === "Backspace") {
-        setIndex((prevIndex) => prevIndex - 1);
+        if (index !== 0) {
+          setIndex((prevIndex) => prevIndex - 1);
+        }
       }
       if (key === "Escape") {
         if (fieldRef.current) {
@@ -60,7 +65,7 @@ const GameField: FC = () => {
       <div className="stats">
         <span className="time">{toTime(time)}</span>
         <span className="index">{index}</span>
-        <span className="errors">{errors}</span>F
+        <span className="errors">{errors}</span>
       </div>
       <div
         className="text_field"
@@ -70,11 +75,8 @@ const GameField: FC = () => {
         onFocus={onblurHandler}
         onKeyDown={onkeydownHandler}
       >
-        <span className="GameField_block done">
-          <Text text={lorem.slice(0, index)} />
-        </span>
         <span className="GameField_block">
-          <Text text={lorem.slice(index, lorem.length - 1)} />
+          <Text text={lorem} />
         </span>
       </div>
     </div>

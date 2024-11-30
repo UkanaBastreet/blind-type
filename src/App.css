@@ -13,10 +13,7 @@ body,
 }
 .App {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 10%;
-  padding: 10%;
+  flex-direction: column;
 
   font-family: "Roboto", serif;
   font-size: 24px;
@@ -27,10 +24,17 @@ body,
 .text_field {
   outline: none;
   text-align: start;
-  text-wrap: wrap;
-  padding: 0.5rem 2rem;
+  text-wrap: balance;
+  white-space: pre-wrap;
 }
 .GameField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
+
+  padding: 0 20%;
   transition: 0.2s;
   outline: none;
   letter-spacing: 2px;
@@ -76,4 +80,20 @@ body,
 }
 .stats > .errors {
   color: tomato;
+}
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20%;
+  color: #555;
+}
+.Header > h1 {
+  font-size: 35px;
+  font-weight: 400;
+  letter-spacing: 4pX;
+  word-spacing: 2px;
+}
+.Header > svg {
+  cursor: pointer;
 }

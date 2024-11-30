@@ -5,7 +5,8 @@ import React from "react";
 const Header: FC = () => {
   return (
     <div className="Header">
-      <SVG />
+      <h1>Blind Type</h1>
+      <SVG  />
     </div>
   );
 };
