@@ -1,19 +1,18 @@
 import React, { FC } from "react";
 import Word from "./Word";
+import { getWordAtIndex } from "../constants";
 
 interface TextProps {
   text: string;
 }
 
 const Text: FC<TextProps> = ({ text }) => {
+  // const currWord = getWordAtIndex(text, index);
   return (
     <span className="Text">
-      {text.split(" ").map((word, index) => (
-        <Word
-          word={index === text.split(" ").length - 1 ? word : word + " "}
-          key={word}
-        />
-      ))}
+      {text.split(" ").map((word, index) => {
+        return <Word word={word} key={"prev"} />;
+      })}
     </span>
   );
 };

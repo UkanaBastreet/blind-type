@@ -91,9 +91,36 @@ body,
 .Header > h1 {
   font-size: 35px;
   font-weight: 400;
-  letter-spacing: 4pX;
+  letter-spacing: 4px;
   word-spacing: 2px;
 }
 .Header > svg {
   cursor: pointer;
+}
+.TextField {
+  display: flex;
+  flex-wrap: wrap;
+}
+.Word {
+  margin-left: 10px;
+}
+.Word.prev {
+  color: white;
+}
+.Word.after {
+  color: #555;
+}
+.Word.current {
+  text-decoration: underline;
+}
+.Letter {
+  margin: 0;
+  padding: 0;
+}
+.Letter.prev {
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+.Letter.current {
 }

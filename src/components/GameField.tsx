@@ -1,4 +1,4 @@
-import React, {
+import {
   FocusEventHandler,
   KeyboardEventHandler,
   useEffect,
@@ -7,7 +7,7 @@ import React, {
   FC,
 } from "react";
 import { lorem, toTime } from "../constants";
-import Text from "./Text";
+import TextField from "./TextField";
 
 const GameField: FC = () => {
   const [index, setIndex] = useState(0);
@@ -41,9 +41,9 @@ const GameField: FC = () => {
   };
   const onblurHandler: FocusEventHandler = (e) => {
     if ((e.type = "focus")) {
-      // setPlaying(true);
+      setPlaying(true);
     } else {
-      // setPlaying(false);
+      setPlaying(false);
     }
   };
   useEffect(() => {
@@ -54,8 +54,6 @@ const GameField: FC = () => {
       }, 100);
     }
     return () => {
-      console.log("clear");
-
       clearInterval(timerInterval);
     };
   }, [playing]);
@@ -76,7 +74,7 @@ const GameField: FC = () => {
         onKeyDown={onkeydownHandler}
       >
         <span className="GameField_block">
-          <Text text={lorem} />
+          <TextField text={lorem} index={index} />
         </span>
       </div>
     </div>
