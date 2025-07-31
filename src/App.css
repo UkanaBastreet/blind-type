@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+.App {
+  color: white;
+  font-family: monospace;
+  letter-spacing: 0.1rem;
+  background-color: #1d1d1d;
+  padding: 1% 15%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 20%;
+  letter-spacing: 5px;
+}
+
+h1 {}
+
+.text {
+  color: #4c4c4c;
+}
+
+.wrong-text {
+  color: #ee4545;
+}
+
+.blue-text {
+  color: #007acc;
+}
+
+.Word {
+  font-size: 20px;
+}
+
+.Word.current {
+  text-decoration: underline solid #4c4c4c;
+}
+
+.Word.done {}
+
+.Word.incorrect {
+  text-decoration: underline solid #ee4545;
+}
+
+.Letter {
+  color: #4c4c4c;
+}
+
+.Letter.current {
+  color: #d4d4d4;
+  text-decoration: underline solid #d4d4d4;
+}
+
+.Letter.done {
+  color: #007acc;
+}
+
+.Letter.incorrect {}
+
+.Word.current>.Letter.done {}
+
+.text-field{
+  font-size: 30px;
+}
+.completed-text {
+  color: #007acc;
+}
