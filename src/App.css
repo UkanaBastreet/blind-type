@@ -1,99 +1,88 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html,
 body,
 #root,
 .App {
-  height: 100%;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
 }
+
 .App {
-  display: flex;
-  flex-direction: column;
-
-  font-family: "Roboto", serif;
-  font-size: 24px;
-  color: #ddd;
-  text-align: center;
-  background-color: #181818;
-}
-.text_field {
-  outline: none;
-  text-align: start;
-  text-wrap: balance;
-  white-space: pre-wrap;
-}
-.GameField {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  flex: 1;
-
-  padding: 0 20%;
-  transition: 0.2s;
-  outline: none;
-  letter-spacing: 2px;
-  word-spacing: 4px;
-  position: relative;
-  color: #555;
-}
-.GameField:not(:focus-within) {
-  filter: blur(5px);
-  cursor: pointer;
-}
-.GameField_block.done {
   color: white;
+  font-family: monospace;
+  letter-spacing: 0.1rem;
+  background-color: #1d1d1d;
+  padding: 1% 15%;
   position: relative;
-  bottom: 0;
-  left: 0;
-}
-.GameField_block.done::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  content: "";
-  width: 3px;
-  height: 24px;
-  background-color: #ccc;
-  animation: blink 1.2s step-end infinite;
-  transition: 0.2s;
-}
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-.stats {
-  padding: 0;
   display: flex;
   justify-content: center;
-  gap: 10px;
-}
-.stats > .errors {
-  color: tomato;
-}
-.Header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 20%;
-  color: #555;
 }
-.Header > h1 {
-  font-size: 35px;
-  font-weight: 400;
-  letter-spacing: 4pX;
-  word-spacing: 2px;
+
+.Header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 20%;
+  letter-spacing: 5px;
 }
-.Header > svg {
-  cursor: pointer;
+
+h1 {}
+
+.text {
+  color: #4c4c4c;
+}
+
+.wrong-text {
+  color: #ee4545;
+}
+
+.blue-text {
+  color: #007acc;
+}
+
+.Word {
+  font-size: 20px;
+}
+
+.Word.current {
+  text-decoration: underline solid #4c4c4c;
+}
+
+.Word.done {}
+
+.Word.incorrect {
+  text-decoration: underline solid #ee4545;
+}
+
+.Letter {
+  color: #4c4c4c;
+}
+
+.Letter.current {
+  color: #d4d4d4;
+  text-decoration: underline solid #d4d4d4;
+}
+
+.Letter.done {
+  color: #007acc;
+}
+
+.Letter.incorrect {}
+
+.Word.current>.Letter.done {}
+
+.text-field{
+  font-size: 30px;
+}
+.completed-text {
+  color: #007acc;
 }

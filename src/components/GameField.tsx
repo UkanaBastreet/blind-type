@@ -1,86 +1,98 @@
-import React, {
-  FocusEventHandler,
-  KeyboardEventHandler,
-  useEffect,
-  useRef,
-  useState,
-  FC,
-} from "react";
-import { lorem, toTime } from "../constants";
-import Text from "./Text";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { TextField } from "./TextField";
 
-const GameField: FC = () => {
+export const GameField: FC = () => {
+  const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
-  const [errors, setErrors] = useState(0);
   const [time, setTime] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const fieldRef = useRef(null);
+  const [errors, setErrors] = useState<inputError[]>([]);
+  const [isDone, setIsDone] = useState(false);
 
-  const onkeydownHandler: KeyboardEventHandler = (e) => {
-    const key = e.key;
-    if (index === lorem.length) {
-      setPlaying(false);
-    }
-    if (key === lorem[index]) {
-      setIndex((prevIndex) => prevIndex + 1);
-      setPlaying(true);
-    } else {
-      if (key === "Backspace") {
-        if (index !== 0) {
-          setIndex((prevIndex) => prevIndex - 1);
-        }
+  const startTimeRef = useRef<number | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const isPlaying = useRef(false);
+
+  const keydownHandler = useCallback(
+    (e: KeyboardEvent) => {
+      if (!startTimeRef.current) {
+        startTimeRef.current = Date.now();
+        timerRef.current = setInterval(() => {
+          setTime((prev) => prev + 1);
+        }, 1000);
       }
-      if (key === "Escape") {
-        if (fieldRef.current) {
-          const cur = fieldRef.current as HTMLDivElement;
-          cur.blur();
-        }
+      if (e.key === text[index]) {
+        setIndex((prev) => prev + 1);
+      } else if (isPlaying.current) {
+        setErrors((prev) => [
+          ...prev,
+          {
+            index,
+            input: e.key,
+            char: text[index],
+            time: time,
+          },
+        ]);
       }
-      key.length === 1 && setErrors((err) => err + 1);
-    }
-  };
-  const onblurHandler: FocusEventHandler = (e) => {
-    if ((e.type = "focus")) {
-      // setPlaying(true);
-    } else {
-      // setPlaying(false);
-    }
-  };
+    },
+    [index, text, time]
+  );
+
+  // game ending
   useEffect(() => {
-    let timerInterval: string | number | NodeJS.Timeout | undefined;
-    if (playing) {
-      timerInterval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
-      }, 100);
+    if (text.length !== 0 && index === text.length && !isDone) {
+      setIsDone(true);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+      const gameData = {
+        text,
+        time,
+        errors,
+        totalError: errors.length,
+        wpm: Math.round(text.split(" ").length / (time / 60)),
+        date: startTimeRef.current,
+      };
+      localStorage.setItem(
+        "training: " + new Date().toLocaleString(),
+        JSON.stringify(gameData)
+      );
     }
-    return () => {
-      console.log("clear");
+  }, [errors, index, isDone, text, time]);
 
-      clearInterval(timerInterval);
-    };
-  }, [playing]);
+  //keydown flow
+  useEffect(() => {
+    if (text.length === 0 || isDone) return;
+    window.addEventListener("keydown", keydownHandler);
+    return () => window.removeEventListener("keydown", keydownHandler);
+  }, [isDone, keydownHandler, text]);
+
+  // text setting
+  useEffect(() => {
+    setText(getText());
+  }, []);
 
   return (
-    <div className="GameField">
-      <div className="stats">
-        <span className="time">{toTime(time)}</span>
-        <span className="index">{index}</span>
-        <span className="errors">{errors}</span>
-      </div>
-      <div
-        className="text_field"
-        ref={fieldRef}
-        tabIndex={0}
-        onBlur={onblurHandler}
-        onFocus={onblurHandler}
-        onKeyDown={onkeydownHandler}
-      >
-        <span className="GameField_block">
-          <Text text={lorem} />
-        </span>
-      </div>
+    <div className="game-field">
+      <h2>{time}</h2>
+      <TextField text={text} errors={errors} index={index} />
     </div>
   );
 };
 
-export default GameField;
+export interface inputError {
+  index: number;
+  char: string;
+  input: string;
+  time: number;
+}
+
+function getText() {
+  return (
+    "house while from"
+      // return "house while from interest or want what begin same help school keep part find such course have eye group say they not mean this out"
+      .split(" ")
+      .sort(() => Math.random() - 0.5)
+      .join(" ")
+      .trim()
+  );
+}

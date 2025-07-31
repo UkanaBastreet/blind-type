@@ -1,18 +1,16 @@
-import React, { FC } from "react";
-import Letter from "./Letter";
+import { FC } from "react";
+import { IWord } from "src/types/text";
+import { Letter } from "./Letter";
 
 interface WordProps {
-  word: string;
+  word: IWord;
 }
-
-const Word: FC<WordProps> = ({ word }) => {
+export const Word: FC<WordProps> = ({ word }) => {
   return (
-    <span className="Word">
-      {word.split("").map((l) => (
-        <Letter letter={l} key={l} />
+    <span className={`Word ${word.status}`}>
+      {word.letters.map((letter, index) => (
+        <Letter key={index} letter={letter} />
       ))}
     </span>
   );
 };
-
-export default Word;

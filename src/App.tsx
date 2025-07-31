@@ -1,14 +1,14 @@
 import "./App.css";
-import Header from "./components/Header";
-import GameField from "./components/GameField";
+import { GameField } from "./components/GameField";
+import { Layout } from "./components/ui/Layout";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <GameField />
-    </div>
+      <div className="App">
+        <Layout>
+          <GameField />
+        </Layout>
+      </div>
   );
 }
-
 export default App;
