@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { IWord } from "src/types/text";
 import { Letter } from "./Letter";
+import { IWord } from "src/types/game.type";
 
 interface WordProps {
   word: IWord;

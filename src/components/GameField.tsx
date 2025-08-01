@@ -1,7 +1,12 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { TextField } from "./TextField";
+import { GameResultsType } from "src/types/game.type";
 
-export const GameField: FC = () => {
+interface GameFieldProps {
+  onFinish: (results: GameResultsType) => void;
+}
+
+export const GameField: FC<GameFieldProps> = ({ onFinish }) => {
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
   const [time, setTime] = useState(0);
@@ -10,7 +15,7 @@ export const GameField: FC = () => {
 
   const startTimeRef = useRef<number | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const isPlaying = useRef(false);
+  const isPlayingRef = useRef(false);
 
   const keydownHandler = useCallback(
     (e: KeyboardEvent) => {
@@ -19,10 +24,11 @@ export const GameField: FC = () => {
         timerRef.current = setInterval(() => {
           setTime((prev) => prev + 1);
         }, 1000);
+        isPlayingRef.current = true;
       }
       if (e.key === text[index]) {
         setIndex((prev) => prev + 1);
-      } else if (isPlaying.current) {
+      } else if (isPlayingRef.current) {
         setErrors((prev) => [
           ...prev,
           {
@@ -50,14 +56,16 @@ export const GameField: FC = () => {
         errors,
         totalError: errors.length,
         wpm: Math.round(text.split(" ").length / (time / 60)),
-        date: startTimeRef.current,
+        date: startTimeRef.current!,
+        acc: Math.round(((text.length - errors.length) / text.length) * 100),
       };
       localStorage.setItem(
         "training: " + new Date().toLocaleString(),
         JSON.stringify(gameData)
       );
+      onFinish(gameData);
     }
-  }, [errors, index, isDone, text, time]);
+  }, [errors, index, isDone, onFinish, text, time]);
 
   //keydown flow
   useEffect(() => {
@@ -89,7 +97,7 @@ export interface inputError {
 function getText() {
   return (
     "house while from"
-      // return "house while from interest or want what begin same help school keep part find such course have eye group say they not mean this out"
+      // "house while from interest or want what begin same help school keep part find such course have eye group say they not mean this out"
       .split(" ")
       .sort(() => Math.random() - 0.5)
       .join(" ")

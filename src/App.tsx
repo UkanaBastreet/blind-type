@@ -1,14 +1,14 @@
 import "./App.css";
-import { GameField } from "./components/GameField";
 import { Layout } from "./components/ui/Layout";
+import { HomePage } from "./Pages/home/home.page";
 
 function App() {
   return (
-      <div className="App">
-        <Layout>
-          <GameField />
-        </Layout>
-      </div>
+    <div className="App">
+      <Layout>
+        <HomePage />
+      </Layout>
+    </div>
   );
 }
 export default App;

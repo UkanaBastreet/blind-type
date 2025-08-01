@@ -2,11 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router";
-import { ErrorPage } from "./pages/404/404.page";
-import { AuthPage } from "./pages/auth/auth.page";
-import { LoginForm } from "./pages/auth/LoginForm";
-import { RegisterForm } from "./pages/auth/RegisterForm";
 import App from "./App";
+import { ErrorPage } from "./Pages/404/404.page";
+import { AuthPage } from "./Pages/auth/auth.page";
+import { LoginForm } from "./Pages/auth/LoginForm";
+import { RegisterForm } from "./Pages/auth/RegisterForm";
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js");
+  });
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

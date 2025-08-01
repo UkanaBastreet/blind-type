@@ -1,4 +1,5 @@
-import { ILetter, IWord } from "src/types/text";
+import { ILetter, IWord } from "src/types/game.type";
+
 
 const words =
   "Lorem ipsum dolor sit amet consectetur, adipisicing elit.".toLowerCase();

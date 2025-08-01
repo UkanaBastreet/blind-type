@@ -1,0 +1,36 @@
+.game-statistic {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  .base-info {
+  }
+  .graph {
+    background: #000;
+    height: 100%;
+    flex: 1;
+  }
+  .extra-info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+  }
+}
+.info-item {
+  &.small {
+    font-size: 12px;
+  }
+  &.common {
+    font-size: 22px;
+  }
+  &.big {
+    font-size: 32px;
+  }
+  .name {
+    color: #556;
+  }
+  .value {
+    color: #007acc;
+    font-size: 2em;
+  }
+}
