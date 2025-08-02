@@ -1,10 +1,14 @@
 .game-result-panel {
-    margin-top: 2rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   gap: 5rem;
   flex: 1;
   .btn {
+    display: flex;
+    justify-content: center;align-items: center;
+    height: 50px;
+    width: 90px;
     background: transparent;
     border: none;
     outline: none;
@@ -16,6 +20,10 @@
       &:hover {
         fill: #fff;
       }
+    }
+    &:focus {
+      border: 2px solid#555;
+      border-radius: 5px;
     }
   }
 }

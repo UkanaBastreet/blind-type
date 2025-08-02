@@ -44,7 +44,7 @@ export const GamePanel: FC<GamePanelProps> = ({
           words
         </button>
       </div>
-      <hr />
+      <div className="separator"></div>
       <div className="variants">
         {variants[mode].map((v) => {
           const handler = () => {

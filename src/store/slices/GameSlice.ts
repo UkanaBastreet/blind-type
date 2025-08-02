@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   GameResultType,
   GameStatusType,
@@ -8,7 +8,6 @@ import {
   inputError,
 } from "src/types/game.type";
 import { getText } from "src/utils/getText";
-import { RootState } from "../store";
 
 interface GameState {
   index: number;
@@ -84,10 +83,15 @@ export const GameSlice = createSlice({
       state.results = null;
       state.startTime = null;
       state.status = "pending";
-      state.text = getText(state.mode, state.wordsCount, state.timeLimit);
+      // state.text = getText(state.mode, state.wordsCount, state.timeLimit);
     },
     next: (state) => {
+      state.index = 0;
+      state.errors = [];
+      state.results = null;
+      state.startTime = null;
       state.status = "pending";
+      state.text = getText(state.mode, state.wordsCount, state.timeLimit);
     },
     changeMode: (state, action: PayloadAction<GameModeType>) => {
       state.mode = action.payload;
@@ -102,9 +106,7 @@ export const GameSlice = createSlice({
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
     },
   },
-  extraReducers(builder) {
-      
-  },
+  extraReducers(builder) {},
 });
 
 export default GameSlice.reducer;
@@ -117,4 +119,3 @@ export const {
   changeTimeLimit,
   keyPressed,
 } = GameSlice.actions;
-

@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect } from "react";
 import { inputError } from "src/types/game.type";
-import { TextField } from "../TextField/TextField";
+import { TextField } from "./TextField/TextField";
 import "./GameField.scss";
 
 interface GameFieldProps {

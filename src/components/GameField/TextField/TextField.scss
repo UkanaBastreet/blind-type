@@ -1,0 +1,15 @@
+.text-field {
+  width: 100%;
+  letter-spacing: 0;
+  font-size: 2rem;
+  .pending-text {
+    color: #555;
+  }
+  .current-char {
+    color: #555;
+    text-decoration: underline;
+  }
+  .completed-text {
+    color: #007acc;
+  }
+}

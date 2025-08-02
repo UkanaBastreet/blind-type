@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { inputError } from "src/types/game.type";
+import './TextField.scss'
 
 interface TextFieldProps {
   text: string;
