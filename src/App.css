@@ -62,7 +62,6 @@ main {
   position: relative;
 }
 
-h1 {}
 
 .text {
   color: #4c4c4c;
@@ -84,8 +83,6 @@ h1 {}
   text-decoration: underline solid #4c4c4c;
 }
 
-.Word.done {}
-
 .Word.incorrect {
   text-decoration: underline solid #ee4545;
 }
@@ -102,7 +99,3 @@ h1 {}
 .Letter.done {
   color: #007acc;
 }
-
-.Letter.incorrect {}
-
-.Word.current>.Letter.done {}
