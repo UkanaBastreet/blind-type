@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { inputError } from "../GameField/GameField";
+import { inputError } from "src/types/game.type";
 
 interface TextFieldProps {
   text: string;
@@ -9,7 +9,7 @@ interface TextFieldProps {
 export const TextField: FC<TextFieldProps> = ({ text, index, errors }) => {
   const completedText = text.slice(0, index);
   const currentChar = text[index];
-  const pendingText = text.slice(index + 1, text.length );
+  const pendingText = text.slice(index + 1, text.length);
   return (
     <div className="text-field">
       <span className="completed-text">{completedText}</span>

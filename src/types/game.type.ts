@@ -1,5 +1,3 @@
-import { inputError } from "src/components/GameField/GameField";
-
 export interface IWord {
   letters: ILetter[];
   word: string;
@@ -10,7 +8,7 @@ export interface ILetter {
   status: "" | "done" | "incorrect" | "current";
 }
 
-export type GameStatusType = "pending" | "playing" | "finished";
+export type GameStatusType = "pending" | "running" | "finished";
 
 export interface GameResultType {
   date: number;
@@ -20,7 +18,16 @@ export interface GameResultType {
   totalError: number;
   wpm: number;
   acc: number;
-  type: GameType;
+  mode: GameModeType;
 }
 
-export type GameType = "time" | "words";
+export interface inputError {
+  index: number;
+  char: string;
+  input: string;
+  // time: number;
+}
+export type GameModeType = "time" | "words";
+export type WordCountType = 10 | 25 | 50 | 100;
+export type TimeLimitType = 5 | 15 | 30 | 60;
+export type LessonIdType = string;

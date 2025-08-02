@@ -1,13 +1,17 @@
+import { Provider } from "react-redux";
 import "./App.css";
+import { HomePage } from "./pages/home/home.page";
 import { Layout } from "./ui/Layout";
-import { HomePage } from "./Pages/home/home.page";
+import { store } from "./store/store";
 
 function App() {
   return (
     <div className="App">
-      <Layout>
-        <HomePage />
-      </Layout>
+      <Provider store={store}>
+        <Layout>
+          <HomePage />
+        </Layout>
+      </Provider>
     </div>
   );
 }

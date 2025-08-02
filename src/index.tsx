@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router";
 import App from "./App";
-import { ErrorPage } from "./Pages/404/404.page";
-import { AuthPage } from "./Pages/auth/auth.page";
-import { LoginForm } from "./Pages/auth/LoginForm";
-import { RegisterForm } from "./Pages/auth/RegisterForm";
+import { ErrorPage } from "./pages/404/404.page";
+import { AuthPage } from "./pages/auth/auth.page";
+import { LoginForm } from "./pages/auth/LoginForm";
+import { RegisterForm } from "./pages/auth/RegisterForm";
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

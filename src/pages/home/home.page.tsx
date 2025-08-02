@@ -1,50 +1,47 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { GameField } from "src/components/GameField/GameField";
 import { GamePanel } from "src/components/GamePanel/GamePanel";
 import { GameResult } from "src/components/GameResult/GameResult";
-import { GameResultType, GameStatusType, GameType } from "src/types/game.type";
+import {
+  changeMode,
+  changeTimeLimit,
+  changeWordsCount,
+  keyPressed,
+  next,
+  restart,
+} from "src/store/slices/GameSlice";
+import { RootState } from "src/store/store";
 
 export const HomePage = () => {
-  const [gameResults, setGameResults] = useState<null | GameResultType>(null);
-  const [gameType, setGameType] = useState<GameType>("time");
-  const [current, setCurrent] = useState(15);
-  const [gameStatus, setGameStatus] = useState<GameStatusType>("pending");
-
-  function handleFinished(results: GameResultType) {
-    setGameStatus("finished");
-    setGameResults(results);
-  }
-  function handleStart() {
-    setGameStatus("playing");
-  }
-  function restart() {
-    setGameStatus("pending");
-    setGameResults(null);
-  }
-  function next() {
-    setGameStatus("pending");
-    setGameResults(null);
-  }
-
+  const { text, index, errors, status, mode, results, timeLimit, wordsCount } =
+    useSelector((state: RootState) => state.game);
+  const dispatch = useDispatch();
   return (
     <div className="home-page">
-      {gameStatus === "pending" && (
+      {status === "pending" && (
         <GamePanel
-          current={current}
-          setCurrent={setCurrent}
-          setType={setGameType}
-          type={gameType}
+          changeMode={(mode) => dispatch(changeMode(mode))}
+          mode={mode}
+          limits={{ time: timeLimit, words: wordsCount }}
+          changeTimeLimit={(limit) => dispatch(changeTimeLimit(limit))}
+          changeWordsCount={(count) => dispatch(changeWordsCount(count))}
         />
       )}
-      {gameStatus !== "finished" ? (
+      {status !== "finished" && text ? (
         <GameField
-          type={gameType}
-          onFinish={handleFinished}
-          gameStatus={gameStatus}
-          onStart={handleStart}
+          onKeyPressed={(key) => dispatch(keyPressed(key))}
+          text={text}
+          errors={errors}
+          index={index}
         />
       ) : (
-        <GameResult next={next} restart={restart} results={gameResults!} />
+        results && (
+          <GameResult
+            next={() => dispatch(next())}
+            restart={() => dispatch(restart())}
+            results={results}
+          />
+        )
       )}
     </div>
   );

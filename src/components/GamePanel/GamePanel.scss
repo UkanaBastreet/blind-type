@@ -1,19 +1,21 @@
 .game-panel {
-  top: -20rem;
-  position: absolute;
-  width: fit-content;
+  // top: -20rem;
+  // position: absolute;
+  width: 40%;
   display: flex;
   background-color: #151515;
   border-radius: 1rem;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: 0.7rem 2rem;
   &,
   div {
     display: flex;
-    gap: 1rem;
+    width: fit-content;
+    gap: 1.5rem;
   }
   .btn {
     font-size: 1rem;
+    font-weight: 700;
     transition: 0.3s;
     border: none;
     outline: none;
