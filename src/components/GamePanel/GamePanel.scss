@@ -1,0 +1,30 @@
+.game-panel {
+  top: -20rem;
+  position: absolute;
+  width: fit-content;
+  display: flex;
+  background-color: #151515;
+  border-radius: 1rem;
+  justify-content: space-evenly;
+  padding: 0.7rem 2rem;
+  &,
+  div {
+    display: flex;
+    gap: 1rem;
+  }
+  .btn {
+    font-size: 1rem;
+    transition: 0.3s;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #555;
+    cursor: pointer;
+    &.active {
+      color: #007acc;
+    }
+    &:hover {
+      color: #fff;
+    }
+  }
+}

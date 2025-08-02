@@ -1,12 +1,21 @@
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { TextField } from "./TextField";
-import { GameResultsType } from "src/types/game.type";
+import { TextField } from "../TextField/TextField";
+import { GameResultType, GameStatusType, GameType } from "src/types/game.type";
+import "./GameField.scss";
 
 interface GameFieldProps {
-  onFinish: (results: GameResultsType) => void;
+  onFinish: (results: GameResultType) => void;
+  onStart: () => void;
+  type: GameType;
+  gameStatus: GameStatusType;
 }
 
-export const GameField: FC<GameFieldProps> = ({ onFinish }) => {
+export const GameField: FC<GameFieldProps> = ({
+  onFinish,
+  onStart,
+  type,
+  gameStatus,
+}) => {
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
   const [time, setTime] = useState(0);
@@ -19,12 +28,13 @@ export const GameField: FC<GameFieldProps> = ({ onFinish }) => {
 
   const keydownHandler = useCallback(
     (e: KeyboardEvent) => {
-      if (!startTimeRef.current) {
+      if (!startTimeRef.current && e.key === text[index]) {
         startTimeRef.current = Date.now();
+        isPlayingRef.current = true;
+        onStart();
         timerRef.current = setInterval(() => {
           setTime((prev) => prev + 1);
         }, 1000);
-        isPlayingRef.current = true;
       }
       if (e.key === text[index]) {
         setIndex((prev) => prev + 1);
@@ -40,7 +50,7 @@ export const GameField: FC<GameFieldProps> = ({ onFinish }) => {
         ]);
       }
     },
-    [index, text, time]
+    [index, onStart, text, time]
   );
 
   // game ending
@@ -58,6 +68,7 @@ export const GameField: FC<GameFieldProps> = ({ onFinish }) => {
         wpm: Math.round(text.split(" ").length / (time / 60)),
         date: startTimeRef.current!,
         acc: Math.round(((text.length - errors.length) / text.length) * 100),
+        type,
       };
       localStorage.setItem(
         "training: " + new Date().toLocaleString(),
@@ -65,7 +76,7 @@ export const GameField: FC<GameFieldProps> = ({ onFinish }) => {
       );
       onFinish(gameData);
     }
-  }, [errors, index, isDone, onFinish, text, time]);
+  }, [errors, index, isDone, onFinish, text, time, type]);
 
   //keydown flow
   useEffect(() => {
@@ -79,9 +90,16 @@ export const GameField: FC<GameFieldProps> = ({ onFinish }) => {
     setText(getText());
   }, []);
 
+  //clear timeout
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
   return (
     <div className="game-field">
-      <h2>{time}</h2>
+      {gameStatus === "playing" ? <h2>{time}</h2> : ""}
       <TextField text={text} errors={errors} index={index} />
     </div>
   );

@@ -1,4 +1,4 @@
-import { inputError } from "src/components/GameField";
+import { inputError } from "src/components/GameField/GameField";
 
 export interface IWord {
   letters: ILetter[];
@@ -10,11 +10,9 @@ export interface ILetter {
   status: "" | "done" | "incorrect" | "current";
 }
 
-export enum GameStatusEnum {
-  playing,
-  finished,
-}
-export interface GameResultsType {
+export type GameStatusType = "pending" | "playing" | "finished";
+
+export interface GameResultType {
   date: number;
   errors: inputError[];
   text: string;
@@ -22,4 +20,7 @@ export interface GameResultsType {
   totalError: number;
   wpm: number;
   acc: number;
+  type: GameType;
 }
+
+export type GameType = "time" | "words";

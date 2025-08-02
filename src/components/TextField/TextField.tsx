@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { inputError } from "./GameField";
+import { inputError } from "../GameField/GameField";
 
 interface TextFieldProps {
   text: string;

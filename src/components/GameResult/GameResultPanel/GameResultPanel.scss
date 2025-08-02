@@ -1,0 +1,21 @@
+.game-result-panel {
+    margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  flex: 1;
+  .btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #555;
+    cursor: pointer;
+    .icon {
+      transition: 0.3s;
+      fill: #555;
+      &:hover {
+        fill: #fff;
+      }
+    }
+  }
+}

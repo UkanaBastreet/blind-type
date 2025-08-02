@@ -1,15 +1,15 @@
 import { FC } from "react";
-import { GameResultsType } from "src/types/game.type";
-import "./GameStatistic.scss";
+import { GameResultType } from "src/types/game.type";
+import "./GameResultStatistic.scss";
 
-interface GameStatisticProps {
-  results: GameResultsType;
+interface GameResultStatisticProps {
+  results: GameResultType;
 }
 
-export const GameStatistic: FC<GameStatisticProps> = ({ results }) => {
+export const GameResultStatistic: FC<GameResultStatisticProps> = ({ results }) => {
   return (
     <>
-      <div className="game-statistic">
+      <div className="game-result-statistic">
         <div className="base-info">
           <InfoItem title="wpm" value={results.wpm.toString()} size="big" />
           <InfoItem
@@ -20,10 +20,17 @@ export const GameStatistic: FC<GameStatisticProps> = ({ results }) => {
         </div>
         <div className="graph"></div>
         <div className="extra-info">
+          <InfoItem
+            title="words"
+            value={results.text.split(" ").length.toString()}
+          />
           <InfoItem title="chars" value={results.text.length.toString()} />
           <InfoItem title="errors" value={results.errors.length.toString()} />
           <InfoItem title="time" value={results.time.toString() + "s"} />
-          <InfoItem title="date" value={new Date(results.date).toLocaleDateString()} />
+          <InfoItem
+            title="date"
+            value={new Date(results.date).toLocaleDateString()}
+          />
         </div>
       </div>
     </>
