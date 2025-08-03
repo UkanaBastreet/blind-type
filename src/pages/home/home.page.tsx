@@ -11,6 +11,7 @@ import {
   restart,
 } from "src/store/slices/GameSlice";
 import { RootState } from "src/store/store";
+import { GamePanel } from "src/components/GamePanel/GamePanel";
 
 export const HomePage = () => {
   const { text, index, errors, status, mode, results, timeLimit, wordsCount } =
@@ -27,12 +28,15 @@ export const HomePage = () => {
         hidden={status !== "pending"}
       />
       {status !== "finished" && text ? (
-        <GameField
-          onKeyPressed={(key) => dispatch(keyPressed(key))}
-          text={text}
-          errors={errors}
-          index={index}
-        />
+        <>
+          <GameField
+            onKeyPressed={(key) => dispatch(keyPressed(key))}
+            text={text}
+            errors={errors}
+            index={index}
+          />
+          <GamePanel restart={() => dispatch(restart())} />
+        </>
       ) : (
         results && (
           <GameResult
