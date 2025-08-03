@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { GameField } from "src/components/GameField/GameField";
-import { GamePanel } from "src/components/GamePanel/GamePanel";
+import { ModePanel } from "src/components/ModePanel/ModePanel";
 import { GameResult } from "src/components/GameResult/GameResult";
 import {
   changeMode,
@@ -18,7 +18,7 @@ export const HomePage = () => {
   const dispatch = useDispatch();
   return (
     <div className="home-page">
-      <GamePanel
+      <ModePanel
         changeMode={(mode) => dispatch(changeMode(mode))}
         mode={mode}
         limits={{ time: timeLimit, words: wordsCount }}

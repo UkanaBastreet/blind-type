@@ -4,9 +4,9 @@ import {
   TimeLimitType,
   WordCountType,
 } from "src/types/game.type";
-import "./GamePanel.scss";
+import "./ModePanel.scss";
 
-interface GamePanelProps {
+interface ModePanelProps {
   mode: GameModeType;
   changeMode: (mode: GameModeType) => void;
   limits: {
@@ -18,7 +18,7 @@ interface GamePanelProps {
   hidden: boolean;
 }
 
-export const GamePanel: FC<GamePanelProps> = ({
+export const ModePanel: FC<ModePanelProps> = ({
   mode,
   changeMode,
   limits,
@@ -31,7 +31,7 @@ export const GamePanel: FC<GamePanelProps> = ({
     words: [10, 25, 50, 100] as WordCountType[],
   };
   return (
-    <div className={"game-panel " + (hidden ? "hidden" : "")}>
+    <div className={"mode-panel " + (hidden ? "hidden" : "")}>
       <div className="types">
         <button
           className={"btn " + (mode === "time" ? "active" : "")}
