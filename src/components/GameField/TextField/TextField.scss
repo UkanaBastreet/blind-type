@@ -2,6 +2,16 @@
   width: 100%;
   letter-spacing: 0;
   font-size: 2rem;
+  line-height: 3rem;
+  max-height: 9rem;
+  overflow: hidden;
+  margin-top: 20rem;
+  position: relative;
+  .text {
+    position: absolute;
+    top: calc(var(--shift) * -39px);
+    transition: .2s;
+  }
   .pending-text {
     color: #555;
   }
