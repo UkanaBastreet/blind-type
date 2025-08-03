@@ -1,6 +1,4 @@
 .game-panel {
-  // top: -20rem;
-  // position: absolute;
   margin-top: 2rem;
   width: 40%;
   display: flex;
@@ -8,6 +6,7 @@
   border-radius: 1rem;
   justify-content: center;
   padding: 0.7rem 3rem;
+  transition: 0.2s;
   &,
   .types,
   .variants {
@@ -15,7 +14,7 @@
     width: fit-content;
     gap: 2rem;
   }
-  .separator{
+  .separator {
     border-radius: 2px;
     height: 100%;
     background-color: #5553;
@@ -35,5 +34,8 @@
     &:hover {
       color: #fff;
     }
+  }
+  &.hidden {
+    opacity: 0;
   }
 }

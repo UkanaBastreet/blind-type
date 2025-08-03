@@ -18,15 +18,14 @@ export const HomePage = () => {
   const dispatch = useDispatch();
   return (
     <div className="home-page">
-      {status === "pending" && (
-        <GamePanel
-          changeMode={(mode) => dispatch(changeMode(mode))}
-          mode={mode}
-          limits={{ time: timeLimit, words: wordsCount }}
-          changeTimeLimit={(limit) => dispatch(changeTimeLimit(limit))}
-          changeWordsCount={(count) => dispatch(changeWordsCount(count))}
-        />
-      )}
+      <GamePanel
+        changeMode={(mode) => dispatch(changeMode(mode))}
+        mode={mode}
+        limits={{ time: timeLimit, words: wordsCount }}
+        changeTimeLimit={(limit) => dispatch(changeTimeLimit(limit))}
+        changeWordsCount={(count) => dispatch(changeWordsCount(count))}
+        hidden={status !== "pending"}
+      />
       {status !== "finished" && text ? (
         <GameField
           onKeyPressed={(key) => dispatch(keyPressed(key))}

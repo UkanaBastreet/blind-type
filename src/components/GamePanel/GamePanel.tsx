@@ -15,6 +15,7 @@ interface GamePanelProps {
   };
   changeTimeLimit: (limit: TimeLimitType) => void;
   changeWordsCount: (count: WordCountType) => void;
+  hidden: boolean;
 }
 
 export const GamePanel: FC<GamePanelProps> = ({
@@ -23,13 +24,14 @@ export const GamePanel: FC<GamePanelProps> = ({
   limits,
   changeTimeLimit,
   changeWordsCount,
+  hidden = false,
 }) => {
   const variants = {
     time: [5, 15, 30, 60] as TimeLimitType[],
     words: [10, 25, 50, 100] as WordCountType[],
   };
   return (
-    <div className="game-panel">
+    <div className={"game-panel " + (hidden ? "hidden" : "")}>
       <div className="types">
         <button
           className={"btn " + (mode === "time" ? "active" : "")}
@@ -44,7 +46,7 @@ export const GamePanel: FC<GamePanelProps> = ({
           words
         </button>
       </div>
-      <div className="separator"></div>
+      <div className="separator" />
       <div className="variants">
         {variants[mode].map((v) => {
           const handler = () => {
