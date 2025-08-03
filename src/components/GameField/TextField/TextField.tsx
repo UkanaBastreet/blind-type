@@ -30,7 +30,6 @@ export const TextField: FC<TextFieldProps> = () => {
   useEffect(() => {
     if (curRef.current && textRef.current) {
       const offsetTop = curRef.current.offsetTop;
-      console.log("offsetTop : ", offsetTop);
       if (offsetTop > 43 + shift * 39) {
         setShift((n) => n + 1);
       }
