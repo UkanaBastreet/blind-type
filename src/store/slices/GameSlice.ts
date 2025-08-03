@@ -83,6 +83,14 @@ export const GameSlice = createSlice({
       state.results = null;
       state.startTime = null;
       state.status = "pending";
+      state.text = getText(state.mode, state.wordsCount, state.timeLimit);
+    },
+    repeat: (state) => {
+      state.index = 0;
+      state.errors = [];
+      state.results = null;
+      state.startTime = null;
+      state.status = "pending";
       // state.text = getText(state.mode, state.wordsCount, state.timeLimit);
     },
     next: (state) => {
@@ -128,6 +136,7 @@ export default GameSlice.reducer;
 
 export const {
   restart,
+  repeat,
   next,
   changeMode,
   changeWordsCount,
