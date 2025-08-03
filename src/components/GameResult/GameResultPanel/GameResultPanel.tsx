@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ReactComponent as RestartIcon } from "../../../assets/restart.svg";
+import { ReactComponent as RepeatIcon } from "../../../assets/repeat.svg";
 import { ReactComponent as NextIcon } from "../../../assets/arrow-right.svg";
 import "./GameResultPanel.scss";
 
@@ -19,7 +19,7 @@ export const GameResultPanel: FC<GameResultPanelProps> = ({
           <NextIcon className="icon next" />
         </button>
         <button onClick={repeat} className="btn">
-          <RestartIcon className="icon restart" />
+          <RepeatIcon className="icon restart" />
         </button>
       </div>
     </>
