@@ -6,16 +6,16 @@ import { GameResultPanel } from "./GameResultPanel/GameResultPanel";
 
 interface GameResultProps {
   results: GameResultType;
-  restart: () => void;
+  repeat: () => void;
   next: () => void;
 }
 
-export const GameResult: FC<GameResultProps> = ({ results, next, restart }) => {
+export const GameResult: FC<GameResultProps> = ({ results, next, repeat }) => {
   return (
     <>
       <div className="game-result">
         <GameResultStatistic results={results} />
-        <GameResultPanel next={next} restart={restart} />
+        <GameResultPanel next={next} repeat={repeat} />
       </div>
     </>
   );

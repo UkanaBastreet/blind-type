@@ -4,13 +4,13 @@ import { ReactComponent as NextIcon } from "../../../assets/arrow-right.svg";
 import "./GameResultPanel.scss";
 
 interface GameResultPanelProps {
-  restart: () => void;
+  repeat: () => void;
   next: () => void;
 }
 
 export const GameResultPanel: FC<GameResultPanelProps> = ({
   next,
-  restart,
+  repeat,
 }) => {
   return (
     <>
@@ -18,7 +18,7 @@ export const GameResultPanel: FC<GameResultPanelProps> = ({
         <button onClick={next} className="btn">
           <NextIcon className="icon next" />
         </button>
-        <button onClick={restart} className="btn">
+        <button onClick={repeat} className="btn">
           <RestartIcon className="icon restart" />
         </button>
       </div>

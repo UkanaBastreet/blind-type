@@ -9,6 +9,7 @@ import {
   keyPressed,
   next,
   restart,
+  repeat
 } from "src/store/slices/GameSlice";
 import { RootState } from "src/store/store";
 import { GamePanel } from "src/components/GamePanel/GamePanel";
@@ -41,7 +42,7 @@ export const HomePage = () => {
         results && (
           <GameResult
             next={() => dispatch(next())}
-            restart={() => dispatch(restart())}
+            repeat={() => dispatch(repeat())}
             results={results}
           />
         )
