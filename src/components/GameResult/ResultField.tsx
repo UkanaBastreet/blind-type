@@ -1,11 +1,11 @@
 import { FC } from "react";
-import "./GameResult.scss";
+import "./ResultField.scss";
 import { GameResultStatistic } from "./GameResultStatistic/GameResultStatistic";
 import { GameResultPanel } from "./GameResultPanel/GameResultPanel";
 
-interface GameResultProps {}
+interface ResultFieldProps {}
 
-export const ResultField: FC<GameResultProps> = () => {
+export const ResultField: FC<ResultFieldProps> = () => {
   return (
       <div className="result-field">
         <GameResultStatistic />
