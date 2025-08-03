@@ -96,14 +96,29 @@ export const GameSlice = createSlice({
     changeMode: (state, action: PayloadAction<GameModeType>) => {
       state.mode = action.payload;
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
+      state.index = 0;
+      state.errors = [];
+      state.results = null;
+      state.startTime = null;
+      state.status = "pending";
     },
     changeWordsCount(state, action: PayloadAction<WordCountType>) {
       state.wordsCount = action.payload;
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
+      state.index = 0;
+      state.errors = [];
+      state.results = null;
+      state.startTime = null;
+      state.status = "pending";
     },
     changeTimeLimit(state, action: PayloadAction<TimeLimitType>) {
       state.timeLimit = action.payload;
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
+      state.index = 0;
+      state.errors = [];
+      state.results = null;
+      state.startTime = null;
+      state.status = "pending";
     },
   },
   extraReducers(builder) {},
