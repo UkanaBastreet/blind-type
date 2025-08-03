@@ -1,24 +1,14 @@
 import { useSelector } from "react-redux";
 import { GameField } from "src/components/GameField/GameField";
-import { ModePanel } from "src/components/ModePanel/ModePanel";
 import { ResultField } from "src/components/GameResult/ResultField";
 import { RootState } from "src/store/store";
-import { GamePanel } from "src/components/GamePanel/GamePanel";
-import './GamePage.scss'
+import "./GamePage.scss";
 
 export const GamePage = () => {
   const status = useSelector((state: RootState) => state.game.status);
   return (
     <div className="game-page">
-      <ModePanel />
-      {status !== "finished" ? (
-        <>
-          <GameField />
-          <GamePanel />
-        </>
-      ) : (
-        <ResultField />
-      )}
+      {status !== "finished" ? <GameField /> : <ResultField />}
     </div>
   );
 };
