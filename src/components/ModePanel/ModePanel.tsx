@@ -5,43 +5,49 @@ import {
   WordCountType,
 } from "src/types/game.type";
 import "./ModePanel.scss";
-
-interface ModePanelProps {
-  mode: GameModeType;
-  changeMode: (mode: GameModeType) => void;
-  limits: {
-    time: TimeLimitType;
-    words: WordCountType;
-  };
-  changeTimeLimit: (limit: TimeLimitType) => void;
-  changeWordsCount: (count: WordCountType) => void;
-  hidden: boolean;
-}
-
-export const ModePanel: FC<ModePanelProps> = ({
-  mode,
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "src/store/store";
+import {
   changeMode,
-  limits,
   changeTimeLimit,
   changeWordsCount,
-  hidden = false,
-}) => {
-  const variants = {
-    time: [5, 15, 30, 60] as TimeLimitType[],
-    words: [10, 25, 50, 100] as WordCountType[],
+} from "src/store/slices/GameSlice";
+
+interface ModePanelProps {}
+
+export const ModePanel: FC<ModePanelProps> = () => {
+  const mode = useSelector((state: RootState) => state.game.mode);
+  const timeLimit = useSelector((state: RootState) => state.game.timeLimit);
+  const wordsCount = useSelector((state: RootState) => state.game.wordsCount);
+  const status = useSelector((state: RootState) => state.game.status);
+  const dispatch = useDispatch();
+  const handleChangeMode = (mode: GameModeType): void => {
+    dispatch(changeMode(mode));
   };
+  const handleChangeTimeLimit = (limit: TimeLimitType): void => {
+    dispatch(changeTimeLimit(limit));
+  };
+  const handleChangeWordsCount = (count: WordCountType): void => {
+    dispatch(changeWordsCount(count));
+  };
+  const limits = {
+    time: timeLimit,
+    words: wordsCount,
+  };
+  const hidden = status !== "pending";
+
   return (
     <div className={"mode-panel " + (hidden ? "hidden" : "")}>
       <div className="types">
         <button
           className={"btn " + (mode === "time" ? "active" : "")}
-          onClick={() => changeMode("time")}
+          onClick={() => handleChangeMode("time")}
         >
           time
         </button>
         <button
           className={"btn " + (mode === "words" ? "active" : "")}
-          onClick={() => changeMode("words")}
+          onClick={() => handleChangeMode("words")}
         >
           words
         </button>
@@ -51,9 +57,9 @@ export const ModePanel: FC<ModePanelProps> = ({
         {variants[mode].map((v) => {
           const handler = () => {
             if (mode === "time") {
-              changeTimeLimit(v as TimeLimitType);
+              handleChangeTimeLimit(v as TimeLimitType);
             } else {
-              changeWordsCount(v as WordCountType);
+              handleChangeWordsCount(v as WordCountType);
             }
           };
           return (
@@ -69,4 +75,9 @@ export const ModePanel: FC<ModePanelProps> = ({
       </div>
     </div>
   );
+};
+
+const variants = {
+  time: [5, 15, 30, 60] as TimeLimitType[],
+  words: [10, 25, 50, 100] as WordCountType[],
 };

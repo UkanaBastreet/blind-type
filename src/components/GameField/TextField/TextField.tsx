@@ -1,13 +1,13 @@
 import { CSSProperties, FC, useEffect, useRef, useState } from "react";
-import { inputError } from "src/types/game.type";
 import "./TextField.scss";
+import { RootState } from "src/store/store";
+import { useSelector } from "react-redux";
 
-interface TextFieldProps {
-  text: string;
-  index: number;
-  errors: inputError[];
-}
-export const TextField: FC<TextFieldProps> = ({ text, index, errors }) => {
+interface TextFieldProps {}
+export const TextField: FC<TextFieldProps> = () => {
+  const text = useSelector((state: RootState) => state.game.text);
+  const index = useSelector((state: RootState) => state.game.index);
+
   const completedText = text.slice(0, index);
   const currentChar = text[index];
   const pendingText = text.slice(index + 1, text.length);

@@ -1,27 +1,19 @@
 import { FC, useCallback, useEffect } from "react";
-import { inputError } from "src/types/game.type";
 import { TextField } from "./TextField/TextField";
 import "./GameField.scss";
 import { Timer } from "./Timer/Timer";
+import { useDispatch } from "react-redux";
+import { keyPressed } from "src/store/slices/GameSlice";
 
-interface GameFieldProps {
-  text: string;
-  index: number;
-  errors: inputError[];
-  onKeyPressed: (key: string) => void;
-}
+interface GameFieldProps {}
 
-export const GameField: FC<GameFieldProps> = ({
-  text,
-  index,
-  errors,
-  onKeyPressed,
-}) => {
+export const GameField: FC<GameFieldProps> = () => {
+  const dispatch = useDispatch();
   const keydownHandler = useCallback(
     (e: KeyboardEvent) => {
-      onKeyPressed(e.key);
+      dispatch(keyPressed(e.key));
     },
-    [onKeyPressed]
+    [dispatch]
   );
   useEffect(() => {
     window.addEventListener("keypress", keydownHandler);
@@ -31,8 +23,8 @@ export const GameField: FC<GameFieldProps> = ({
   }, [keydownHandler]);
   return (
     <div className="game-field">
-      <Timer/>
-      <TextField text={text} errors={errors} index={index} />
+      <Timer />
+      <TextField />
     </div>
   );
 };

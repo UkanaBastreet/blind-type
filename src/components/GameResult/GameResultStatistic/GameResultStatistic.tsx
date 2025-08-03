@@ -1,14 +1,17 @@
 import { FC } from "react";
 import { GameResultType } from "src/types/game.type";
 import "./GameResultStatistic.scss";
+import { RootState } from "src/store/store";
+import { useSelector } from "react-redux";
 
-interface GameResultStatisticProps {
-  results: GameResultType;
-}
+interface GameResultStatisticProps {}
 
-export const GameResultStatistic: FC<GameResultStatisticProps> = ({ results }) => {
+export const GameResultStatistic: FC<GameResultStatisticProps> = () => {
+  const results = useSelector(
+    (state: RootState) => state.game.results
+  ) as GameResultType;
+
   return (
-    <>
       <div className="game-result-statistic">
         <div className="base-info">
           <InfoItem title="wpm" value={results.wpm.toString()} size="big" />
@@ -33,7 +36,6 @@ export const GameResultStatistic: FC<GameResultStatisticProps> = ({ results }) =
           />
         </div>
       </div>
-    </>
   );
 };
 
