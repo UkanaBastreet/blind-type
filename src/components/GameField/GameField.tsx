@@ -2,6 +2,7 @@ import { FC, useCallback, useEffect } from "react";
 import { inputError } from "src/types/game.type";
 import { TextField } from "./TextField/TextField";
 import "./GameField.scss";
+import { Timer } from "./Timer/Timer";
 
 interface GameFieldProps {
   text: string;
@@ -30,6 +31,7 @@ export const GameField: FC<GameFieldProps> = ({
   }, [keydownHandler]);
   return (
     <div className="game-field">
+      <Timer/>
       <TextField text={text} errors={errors} index={index} />
     </div>
   );
