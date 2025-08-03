@@ -5,9 +5,9 @@ import { GameResultPanel } from "./GameResultPanel/GameResultPanel";
 
 interface GameResultProps {}
 
-export const GameResult: FC<GameResultProps> = () => {
+export const ResultField: FC<GameResultProps> = () => {
   return (
-      <div className="game-result">
+      <div className="result-field">
         <GameResultStatistic />
         <GameResultPanel />
       </div>
