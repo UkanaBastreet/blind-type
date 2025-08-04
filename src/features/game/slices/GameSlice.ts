@@ -132,7 +132,7 @@ const GameSlice = createSlice({
   extraReducers(builder) {},
 });
 
-export default GameSlice.reducer;
+export const gameReducer = GameSlice.reducer;
 
 export const {
   restart,
