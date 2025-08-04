@@ -1,17 +1,16 @@
-import { Provider } from "react-redux";
-import { Layout } from "src/shared/ui/Layout";
+import { useSelector } from "react-redux";
+import { Layout } from "src/shared/widgets/Layout/Layout";
 import { GamePage } from "src/features/game/GamePage";
-import { store } from "./store";
+import { RootState } from "./store";
 import "./styles/App.css";
 
 function App() {
+  const theme = useSelector((state: RootState) => state.theme.theme);
   return (
-    <div className="App">
-      <Provider store={store}>
-        <Layout>
-          <GamePage />
-        </Layout>
-      </Provider>
+    <div className={"App " + theme}>
+      <Layout>
+        <GamePage />
+      </Layout>
     </div>
   );
 }

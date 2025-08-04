@@ -6,6 +6,8 @@ import { AuthPage } from "./features/auth/auth.page";
 import { LoginForm } from "./features/auth/LoginForm";
 import { RegisterForm } from "./features/auth/RegisterForm";
 import App from "./app/App";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -16,6 +18,7 @@ if ("serviceWorker" in navigator) {
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,8 +36,11 @@ const router = createBrowserRouter([
     path: "/training",
   },
 ]);
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

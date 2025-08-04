@@ -23,6 +23,7 @@ export const TextField: FC<TextFieldProps> = () => {
   const textRef = useRef<null | HTMLDivElement>(null);
   const keydownHandler = useCallback(
     (e: KeyboardEvent) => {
+      e.preventDefault();
       dispatch(keyPressed(e.key));
     },
     [dispatch]
