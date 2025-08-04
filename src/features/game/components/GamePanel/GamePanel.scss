@@ -1,25 +1,15 @@
 .game-panel {
-  .btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 90px;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--sub-color);
-    cursor: pointer;
-    .icon {
-      transition: 0.3s;
-      fill: var(--sub-color);
-      &:hover {
-        fill: var(--text-color);
-      }
+  .icon {
+    transition: 0.3s;
+    fill: var(--sub-color);
+
+    &:hover {
+      fill: var(--text-color);
     }
-    &:focus {
-      border: 2px solid var(--sub-color);
-      border-radius: 5px;
-    }
+  }
+
+  &:focus {
+    border: 2px solid var(--sub-color);
+    border-radius: 5px;
   }
 }
