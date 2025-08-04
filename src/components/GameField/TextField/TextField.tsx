@@ -34,7 +34,7 @@ export const TextField: FC<TextFieldProps> = () => {
         setShift((n) => n + 1);
       }
     }
-  }, [shift]);
+  }, [shift, currentChar]);
 
   useEffect(() => {
     window.addEventListener("keypress", keydownHandler);
