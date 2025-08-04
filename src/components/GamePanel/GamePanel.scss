@@ -14,11 +14,11 @@
       transition: 0.3s;
       fill: var(--sub-color);
       &:hover {
-        fill: #fff;
+        fill: var(--text-color);
       }
     }
     &:focus {
-      border: 2px solidvar(--sub-color);
+      border: 2px solid var(--sub-color);
       border-radius: 5px;
     }
   }
