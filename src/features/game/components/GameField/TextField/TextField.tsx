@@ -10,10 +10,13 @@ import "./TextField.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { keyPressed } from "src/features/game/slices/GameSlice";
 import { RootState } from "src/app/store";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface TextFieldProps {}
 export const TextField: FC<TextFieldProps> = () => {
-  const { pendingText, currentChar, completedText } = useText();
+  const text = useSelector((state: RootState) => state.game.text);
+  const index = useSelector((state: RootState) => state.game.index);
+  const { pendingText, currentChar, completedText } = useText(text, index);
   const [shift, setShift] = useState(0);
   const textStyles = { "--shift": shift } as CSSProperties;
 
@@ -45,7 +48,13 @@ export const TextField: FC<TextFieldProps> = () => {
   }, [keydownHandler]);
 
   return (
-    <div className="text-field">
+    <motion.div
+      className="text-field"
+      key={text}
+      initial={{ opacity: 0,x:100 }}
+      animate={{ opacity: 1,x:0 }}
+      transition={{ duration: 0.2 }}
+    >
       <div className="text" ref={textRef} style={textStyles}>
         <span className="completed-text">{completedText}</span>
         <span className="current-char" ref={curRef}>
@@ -53,13 +62,11 @@ export const TextField: FC<TextFieldProps> = () => {
         </span>
         <span className="pending-text">{pendingText}</span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-const useText = () => {
-  const text = useSelector((state: RootState) => state.game.text);
-  const index = useSelector((state: RootState) => state.game.index);
+const useText = (text: string, index: number) => {
   const completedText = text.slice(0, index);
   const currentChar = text[index];
   const pendingText = text.slice(index + 1, text.length);
