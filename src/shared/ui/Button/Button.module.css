@@ -9,4 +9,9 @@
     outline: none;
     color: var(--sub-color);
     cursor: pointer;
+
+    &:focus {
+        border: 2px solid var(--sub-color);
+        border-radius: 5px;
+    }
 }

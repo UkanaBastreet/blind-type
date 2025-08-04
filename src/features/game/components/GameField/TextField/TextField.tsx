@@ -10,7 +10,7 @@ import "./TextField.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { keyPressed } from "src/features/game/slices/GameSlice";
 import { RootState } from "src/app/store";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface TextFieldProps {}
 export const TextField: FC<TextFieldProps> = () => {
@@ -51,8 +51,8 @@ export const TextField: FC<TextFieldProps> = () => {
     <motion.div
       className="text-field"
       key={text}
-      initial={{ opacity: 0,x:100 }}
-      animate={{ opacity: 1,x:0 }}
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.2 }}
     >
       <div className="text" ref={textRef} style={textStyles}>

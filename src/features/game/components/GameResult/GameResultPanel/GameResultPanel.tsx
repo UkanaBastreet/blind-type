@@ -4,6 +4,7 @@ import { ReactComponent as NextIcon } from "src/shared/assets/arrow-right.svg";
 import "./GameResultPanel.scss";
 import { useDispatch } from "react-redux";
 import { next, repeat } from "../../../slices/GameSlice";
+import { Button } from "src/shared/ui/Button/Button";
 
 interface GameResultPanelProps {}
 
@@ -12,12 +13,12 @@ export const GameResultPanel: FC<GameResultPanelProps> = () => {
   return (
     <>
       <div className="game-result-panel">
-        <button onClick={() => dispatch(next())} className="btn">
+        <Button onClick={() => dispatch(next())}>
           <NextIcon className="icon next" />
-        </button>
-        <button onClick={() => dispatch(repeat())} className="btn">
+        </Button>
+        <Button onClick={() => dispatch(repeat())}>
           <RepeatIcon className="icon restart" />
-        </button>
+        </Button>
       </div>
     </>
   );

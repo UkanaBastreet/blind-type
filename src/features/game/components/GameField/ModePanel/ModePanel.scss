@@ -31,7 +31,7 @@
     &.active {
       color: var(--main-color);
     }
-    &:hover {
+    &:hover,&:focus {
       color: var(--text-color);
     }
   }
