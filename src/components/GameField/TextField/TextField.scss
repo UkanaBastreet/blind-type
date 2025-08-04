@@ -14,13 +14,13 @@
     transition: 0.2s;
   }
   .pending-text {
-    color: #555;
+    color: var(--sub-color);
   }
   .current-char {
-    color: #555;
+    color: var(--sub-color);
     text-decoration: underline;
   }
   .completed-text {
-    color: #007acc;
+    color: var(--main-color);
   }
 }

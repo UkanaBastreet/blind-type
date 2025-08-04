@@ -6,23 +6,24 @@
   flex: 1;
   .btn {
     display: flex;
-    justify-content: center;align-items: center;
+    justify-content: center;
+    align-items: center;
     height: 50px;
     width: 90px;
     background: transparent;
     border: none;
     outline: none;
-    color: #555;
+    color: var(--sub-color);
     cursor: pointer;
     .icon {
       transition: 0.3s;
-      fill: #555;
+      fill: var(--sub-color);
       &:hover {
         fill: #fff;
       }
     }
     &:focus {
-      border: 2px solid#555;
+      border: 2px solid var(--sub-color);
       border-radius: 5px;
     }
   }

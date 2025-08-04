@@ -8,17 +8,17 @@
     background: transparent;
     border: none;
     outline: none;
-    color: #555;
+    color: var(--sub-color);
     cursor: pointer;
     .icon {
       transition: 0.3s;
-      fill: #555;
+      fill: var(--sub-color);
       &:hover {
         fill: #fff;
       }
     }
     &:focus {
-      border: 2px solid#555;
+      border: 2px solidvar(--sub-color);
       border-radius: 5px;
     }
   }
