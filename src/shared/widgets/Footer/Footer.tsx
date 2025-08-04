@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeTheme } from "src/app/slices/ThemeSlice";
 import { RootState } from "src/app/store";
+import { Button } from "src/shared/ui/Button/Button";
 
 export const Footer: FC = () => {
   const dispatch = useDispatch();
@@ -10,14 +11,14 @@ export const Footer: FC = () => {
   return (
     <>
       <div className="footer">
-        <button
+        <Button
           className="btn"
           onClick={() =>
             dispatch(changeTheme(theme === "dino" ? "vscode" : "dino"))
           }
         >
           {theme}
-        </button>
+        </Button>
       </div>
     </>
   );
