@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { GameResultType } from "src/features/game/types/game.type";
+import { type FC } from "react";
 import "./GameResultStatistic.scss";
 import { useSelector } from "react-redux";
-import { RootState } from "src/app/store";
+import type { GameResultType } from "../../../types/game.type";
+import type { RootState } from "../../../../../app/store";
 
 interface GameResultStatisticProps {}
 

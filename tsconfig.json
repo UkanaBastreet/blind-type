@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es2016",
     "jsx": "react-jsx",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "baseUrl": "./",
-    "paths": {},
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "types": ["react","node"]
-  }
+    "types": ["vite/client"]
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

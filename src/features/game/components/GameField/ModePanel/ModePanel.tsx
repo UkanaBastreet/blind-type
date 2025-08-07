@@ -1,17 +1,17 @@
-import { FC } from "react";
-import {
+import type { FC } from "react";
+import "./ModePanel.scss";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../../../../app/store";
+import type {
   GameModeType,
   TimeLimitType,
   WordCountType,
-} from "src/features/game/types/game.type";
-import "./ModePanel.scss";
-import { useDispatch, useSelector } from "react-redux";
+} from "../../../types/game.type";
 import {
   changeMode,
   changeTimeLimit,
   changeWordsCount,
-} from "src/features/game/slices/GameSlice";
-import { RootState } from "src/app/store";
+} from "../../../slices/GameSlice";
 
 interface ModePanelProps {}
 

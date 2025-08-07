@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { Layout } from "src/shared/widgets/Layout/Layout";
-import { GamePage } from "src/features/game/GamePage";
-import { RootState } from "./store";
 import "./styles/App.css";
+import { Layout } from "../shared/widgets/Layout/Layout";
+import { GamePage } from "../features/game/GamePage";
+import type { RootState } from "./store";
 
 function App() {
   const theme = useSelector((state: RootState) => state.theme.theme);

@@ -1,11 +1,5 @@
-import {
-  GameModeType,
-  GameResultType,
-  ILetter,
-  IWord,
-  TimeLimitType,
-  WordCountType,
-} from "src/features/game/types/game.type";
+
+import type { GameModeType, GameResultType, ILetter, IWord, TimeLimitType, WordCountType } from "../types/game.type";
 import { wordsArr } from "./words";
 
 const words =

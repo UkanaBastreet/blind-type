@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { type FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeTheme } from "src/app/slices/ThemeSlice";
-import { RootState } from "src/app/store";
-import { Button } from "src/shared/ui/Button/Button";
+import type { RootState } from "../../../app/store";
+import { changeTheme } from "../../../app/slices/ThemeSlice";
+import { Button } from "../../ui/Button/Button";
 
 export const Footer: FC = () => {
   const dispatch = useDispatch();

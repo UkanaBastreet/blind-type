@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { type FC } from "react";
 import { TextField } from "./TextField/TextField";
 import { GamePanel } from "../GamePanel/GamePanel";
 import { ModePanel } from "./ModePanel/ModePanel";

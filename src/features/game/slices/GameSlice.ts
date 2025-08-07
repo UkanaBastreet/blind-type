@@ -1,13 +1,13 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type {
+  GameModeType,
   GameResultType,
   GameStatusType,
-  GameModeType,
-  WordCountType,
-  TimeLimitType,
   inputError,
-} from "src/features/game/types/game.type";
-import { getText } from "src/features/game/utils/getText";
+  TimeLimitType,
+  WordCountType,
+} from "../types/game.type";
+import { getText } from "../utils/getText";
 
 interface GameState {
   index: number;
@@ -129,7 +129,7 @@ const GameSlice = createSlice({
       state.status = "pending";
     },
   },
-  extraReducers(builder) {},
+  extraReducers() {},
 });
 
 export const gameReducer = GameSlice.reducer;

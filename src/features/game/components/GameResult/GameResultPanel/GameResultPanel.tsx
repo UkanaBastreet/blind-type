@@ -1,10 +1,10 @@
-import { FC } from "react";
-import { ReactComponent as RepeatIcon } from "src/shared/assets/repeat.svg";
-import { ReactComponent as NextIcon } from "src/shared/assets/arrow-right.svg";
+import type { FC } from "react";
+import RepeatIcon from "../../../../../shared/assets/repeat.svg?react";
+import NextIcon from "../../../../../shared/assets/arrow-right.svg?react";
 import "./GameResultPanel.scss";
 import { useDispatch } from "react-redux";
 import { next, repeat } from "../../../slices/GameSlice";
-import { Button } from "src/shared/ui/Button/Button";
+import { Button } from "../../../../../shared/ui/Button/Button";
 
 interface GameResultPanelProps {}
 

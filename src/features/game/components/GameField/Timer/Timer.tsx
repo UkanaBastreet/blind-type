@@ -1,7 +1,7 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { type FC, useEffect, useRef, useState } from "react";
 import "./Timer.scss";
 import { useSelector } from "react-redux";
-import { RootState } from "src/app/store";
+import type { RootState } from "../../../../../app/store";
 
 interface TimerProps {}
 
