@@ -1,6 +1,6 @@
 import {
-  CSSProperties,
-  FC,
+  type CSSProperties,
+  type FC,
   useCallback,
   useEffect,
   useRef,
@@ -8,9 +8,9 @@ import {
 } from "react";
 import "./TextField.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { keyPressed } from "src/features/game/slices/GameSlice";
-import { RootState } from "src/app/store";
 import { motion } from "framer-motion";
+import type { RootState } from "../../../../../app/store";
+import { keyPressed } from "../../../slices/GameSlice";
 
 interface TextFieldProps {}
 export const TextField: FC<TextFieldProps> = () => {

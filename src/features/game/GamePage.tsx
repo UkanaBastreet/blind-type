@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import "./GamePage.scss";
-import { RootState } from "src/app/store";
 import { GameField } from "./components/GameField/GameField";
 import { ResultField } from "./components/GameResult/ResultField";
 import { AnimatePresence, motion } from "framer-motion";
+import type { RootState } from "../../app/store";
 
 export const GamePage = () => {
   const status = useSelector((state: RootState) => state.game.status);

@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { ILetter } from "src/features/game/types/game.type";
+import { type FC } from "react";
+import type { ILetter } from "../../../types/game.type";
 
 interface LetterProps {
   letter: ILetter;

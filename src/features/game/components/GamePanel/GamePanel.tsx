@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { ReactComponent as RestartIcon } from "src/shared/assets/restart.svg";
+import type { FC } from "react";
+import RestartIcon from "../../../../shared/assets/restart.svg?react";
 import "./GamePanel.scss";
 import { useDispatch } from "react-redux";
 import { restart } from "../../slices/GameSlice";
-import { Button } from "src/shared/ui/Button/Button";
+import { Button } from "../../../../shared/ui/Button/Button";
 
 interface GamePanelProps {}
 
