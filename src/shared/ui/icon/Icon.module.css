@@ -1,0 +1,14 @@
+.Icon {
+    cursor: pointer;
+}
+
+.Icon>svg {
+    width: 2rem;
+    height: 2rem;
+    transition: 0.3s;
+    fill: var(--sub-color);
+}
+
+.Icon>svg:hover {
+    fill: var(--text-color);
+}
