@@ -1,0 +1,11 @@
+.RegisterForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .title {
+
+        color: var(--sub-color);
+    font-size: 1.5rem;
+    }
+}
