@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router";
-import { AuthPage } from "./features/auth/auth.page";
 import App from "./app/App";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import { GamePage } from "./features/game/GamePage";
+import { AuthPage } from "./features/auth/AuthPage";
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -20,14 +21,17 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-  },
-  {
-    path: "/auth",
-    element: <AuthPage />,
-  },
-  {
-    path: "/training",
+    Component: App,
+    children: [
+      {
+        index: true,
+        Component: GamePage,
+      },
+      {
+        path: "/auth",
+        Component: AuthPage,
+      },
+    ],
   },
 ]);
 
