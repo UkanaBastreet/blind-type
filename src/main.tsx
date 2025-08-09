@@ -3,8 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router";
 import { AuthPage } from "./features/auth/auth.page";
-import { LoginForm } from "./features/auth/LoginForm";
-import { RegisterForm } from "./features/auth/RegisterForm";
 import App from "./app/App";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
@@ -27,10 +25,6 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <AuthPage />,
-    children: [
-      { path: "/auth/login", element: <LoginForm /> },
-      { path: "/auth/register", element: <RegisterForm /> },
-    ],
   },
   {
     path: "/training",

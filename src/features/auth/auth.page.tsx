@@ -1,4 +1,5 @@
-import { Outlet } from "react-router-dom";
+import { LoginForm } from "./LoginForm";
+import { RegisterForm } from "./RegisterForm";
 
 export const AuthPage = () => {
   return (
@@ -6,7 +7,8 @@ export const AuthPage = () => {
       className="auth-page"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      <Outlet />
+      <RegisterForm />
+      <LoginForm />
     </div>
   );
 };
