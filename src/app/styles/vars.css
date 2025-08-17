@@ -1,3 +1,10 @@
+:root {
+    --text-size: 2rem;
+    --text-size-small: 1rem;
+    --text-size-common: 1.8rem;
+    --text-size-big: 2.8rem;
+}
+
 .vscode {
     --main-color: #007acc;
     --sub-color: #4c4c4c;
