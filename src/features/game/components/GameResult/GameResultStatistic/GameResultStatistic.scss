@@ -17,19 +17,19 @@
 }
 .info-item {
   &.small {
-    font-size: 12px;
+    font-size: var(--text-size-small);
   }
   &.common {
-    font-size: 22px;
+    font-size: var(--text-size-common);
   }
   &.big {
-    font-size: 32px;
+    font-size: var(--text-size-big);
   }
   .name {
     color: var(--sub-color);
   }
   .value {
     color: var(--main-color);
-    font-size: 2em;
+    font-size: 1.8em;
   }
 }

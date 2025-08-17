@@ -1,9 +1,17 @@
-.Input{
-    font-size: 1.5rem;
+.Input {
+    font-size: var(--text-size-common);
     color: var(--text-color);
     outline: none;
     border-radius: .5rem;
     border: none;
     background-color: var(--sub-bg-color);
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
+    outline-width: 2px;
+    outline-style: solid;
+    transition: .2s;
+    outline-offset: 2px;
+    outline-color: transparent;
+    &:focus {
+        outline-color: var(--sub-color);
+    }
 }

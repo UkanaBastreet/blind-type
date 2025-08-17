@@ -1,7 +1,7 @@
 .text-field {
   width: 100%;
   letter-spacing: 0;
-  font-size: 2rem;
+  font-size: var(--text-size);
   line-height: 3rem;
   max-height: 9rem;
   overflow: hidden;

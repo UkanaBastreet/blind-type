@@ -21,7 +21,7 @@
     width: 5px;
   }
   .btn {
-    font-size: 1.1rem;
+    font-size: var(--text-size-small);
     transition: 0.3s;
     border: none;
     outline: none;
@@ -31,7 +31,8 @@
     &.active {
       color: var(--main-color);
     }
-    &:hover,&:focus {
+    &:hover,
+    &:focus {
       color: var(--text-color);
     }
   }

@@ -2,16 +2,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
-    width: 90px;
+
     background: transparent;
     border: none;
     outline: none;
-    color: var(--sub-color);
     cursor: pointer;
+    border-radius: .5rem;
+    color: var(--text-color);
+    background: var(--sub-bg-color);
+
+    &:hover {
+        transition: .2s;
+        background: var(--text-color);
+        color: var(--sub-bg-color);
+        >.icon{
+            fill: var(--sub-bg-color);
+        }
+    }
 
     &:focus {
-        border: 2px solid var(--sub-color);
-        border-radius: 5px;
+        outline: 2px solid var(--sub-color);
+    }
+
+    &.text {
+        color: var(--sub-color);
+    }
+
+    &.small {
+        font-size: var(--text-size-small);
+        padding: 1rem;
+    }
+
+    &.common {
+        font-size: var(--text-size-common);
+        padding: 0.5rem 1rem;
+    }
+
+    &.big {
+        font-size: var(--text-size-big);
+        padding: 1rem;
     }
 }
