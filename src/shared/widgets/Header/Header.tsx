@@ -10,7 +10,7 @@ export const Header: FC = () => {
       <Link to={"/"}>
         <div className={styles.logo}>
           <span className={styles.description}>dev by Ukana</span>
-          <h1>Blind Type</h1>
+          <span className={styles.title}>Blind Type</span>
         </div>
       </Link>
       <div className={styles.user}>
