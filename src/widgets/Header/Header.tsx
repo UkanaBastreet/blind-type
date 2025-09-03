@@ -1,7 +1,7 @@
 import { type FC } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import PersonIcon from "../../assets/person.svg?react";
+import PersonIcon from "@shared/assets/person.svg?react";
 import styles from "./Header.module.css";
 import type { RootState } from "@app/store";
 import { Icon } from "@shared/ui/icon/Icon";

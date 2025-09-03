@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import "./styles/App.css";
 import type { RootState } from "./store";
 import { Outlet } from "react-router";
-import { Layout } from "@shared/widgets";
+import { Layout } from "@widgets/index";
 
 function App() {
   const theme = useSelector((state: RootState) => state.theme.theme);
