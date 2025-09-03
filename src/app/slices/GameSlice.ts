@@ -6,8 +6,8 @@ import type {
   inputError,
   TimeLimitType,
   WordCountType,
-} from "../types/game.type";
-import { getText } from "../utils/getText";
+} from "../../features/game/types/game.type";
+import { getText } from "@features/game/utils/getText";
 
 interface GameState {
   index: number;
