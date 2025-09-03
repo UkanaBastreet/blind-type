@@ -14,25 +14,14 @@ import {
 } from "@app/slices/GameSlice";
 
 export const ModePanel: FC = () => {
-  const mode = useSelector((state: RootState) => state.game.mode);
-  const timeLimit = useSelector((state: RootState) => state.game.timeLimit);
-  const wordsCount = useSelector((state: RootState) => state.game.wordsCount);
-  const status = useSelector((state: RootState) => state.game.status);
-  const dispatch = useDispatch();
-  const handleChangeMode = (mode: GameModeType): void => {
-    dispatch(changeMode(mode));
-  };
-  const handleChangeTimeLimit = (limit: TimeLimitType): void => {
-    dispatch(changeTimeLimit(limit));
-  };
-  const handleChangeWordsCount = (count: WordCountType): void => {
-    dispatch(changeWordsCount(count));
-  };
-  const limits = {
-    time: timeLimit,
-    words: wordsCount,
-  };
-  const hidden = status !== "pending";
+  const {
+    mode,
+    limits,
+    hidden,
+    handleChangeMode,
+    handleChangeTimeLimit,
+    handleChangeWordsCount,
+  } = useModePanel();
 
   return (
     <div className={"mode-panel " + (hidden ? "hidden" : "")}>
@@ -78,4 +67,34 @@ export const ModePanel: FC = () => {
 const variants = {
   time: [5, 15, 30, 60] as TimeLimitType[],
   words: [10, 25, 50, 100] as WordCountType[],
+};
+
+const useModePanel = () => {
+  const mode = useSelector((state: RootState) => state.game.mode);
+  const timeLimit = useSelector((state: RootState) => state.game.timeLimit);
+  const wordsCount = useSelector((state: RootState) => state.game.wordsCount);
+  const status = useSelector((state: RootState) => state.game.status);
+  const dispatch = useDispatch();
+  const handleChangeMode = (mode: GameModeType): void => {
+    dispatch(changeMode(mode));
+  };
+  const handleChangeTimeLimit = (limit: TimeLimitType): void => {
+    dispatch(changeTimeLimit(limit));
+  };
+  const handleChangeWordsCount = (count: WordCountType): void => {
+    dispatch(changeWordsCount(count));
+  };
+  const limits = {
+    time: timeLimit,
+    words: wordsCount,
+  };
+  const hidden = status !== "pending";
+  return {
+    mode,
+    limits,
+    hidden,
+    handleChangeMode,
+    handleChangeTimeLimit,
+    handleChangeWordsCount,
+  };
 };

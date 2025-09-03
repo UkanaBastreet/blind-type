@@ -1,11 +1,10 @@
 import { type FC, useEffect, useRef, useState } from "react";
 import "./Timer.scss";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../../../app/store";
+import type { RootState } from "@app/store";
 
-interface TimerProps {}
 
-export const Timer: FC<TimerProps> = () => {
+export const Timer: FC= () => {
   const status = useSelector((state: RootState) => state.game.status);
   const [time, setTime] = useState(0);
   const timerRef = useRef<null | NodeJS.Timeout>(null);
