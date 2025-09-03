@@ -4,9 +4,7 @@ import { useSelector } from "react-redux";
 import type { GameResultType } from "../../../types/game.type";
 import type { RootState } from "../../../../../app/store";
 
-interface GameResultStatisticProps {}
-
-export const GameResultStatistic: FC<GameResultStatisticProps> = () => {
+export const GameResultStatistic: FC = () => {
   const results = useSelector(
     (state: RootState) => state.game.results
   ) as GameResultType;
