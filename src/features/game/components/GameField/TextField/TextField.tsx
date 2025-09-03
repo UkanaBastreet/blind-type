@@ -9,11 +9,10 @@ import {
 import "./TextField.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import type { RootState } from "../../../../../app/store";
-import { keyPressed } from "../../../slices/GameSlice";
+import type { RootState } from "@app/store";
+import { keyPressed } from "@app/slices/GameSlice";
 
-interface TextFieldProps {}
-export const TextField: FC<TextFieldProps> = () => {
+export const TextField: FC = () => {
   const text = useSelector((state: RootState) => state.game.text);
   const index = useSelector((state: RootState) => state.game.index);
   const { pendingText, currentChar, completedText } = useText(text, index);

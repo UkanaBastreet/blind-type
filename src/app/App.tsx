@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import "./styles/App.css";
-import { Layout } from "../shared/widgets/Layout/Layout";
 import type { RootState } from "./store";
 import { Outlet } from "react-router";
+import { Layout } from "@shared/widgets";
 
 function App() {
   const theme = useSelector((state: RootState) => state.theme.theme);

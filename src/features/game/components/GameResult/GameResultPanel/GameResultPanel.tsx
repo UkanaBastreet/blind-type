@@ -3,12 +3,11 @@ import RepeatIcon from "../../../../../shared/assets/repeat.svg?react";
 import NextIcon from "../../../../../shared/assets/arrow-right.svg?react";
 import "./GameResultPanel.scss";
 import { useDispatch } from "react-redux";
-import { next, repeat } from "../../../slices/GameSlice";
 import { Button } from "../../../../../shared/ui/Button/Button";
+import { next, repeat } from "../../../../../app/slices/GameSlice";
 
-interface GameResultPanelProps {}
 
-export const GameResultPanel: FC<GameResultPanelProps> = () => {
+export const GameResultPanel: FC = () => {
   const dispatch = useDispatch();
   return (
     <>

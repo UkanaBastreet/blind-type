@@ -1,13 +1,11 @@
 import type { FC } from "react";
-import RestartIcon from "../../../../shared/assets/restart.svg?react";
 import "./GamePanel.scss";
+import RestartIcon from "@shared/assets/restart.svg?react";
 import { useDispatch } from "react-redux";
-import { restart } from "../../slices/GameSlice";
-import { Button } from "../../../../shared/ui/Button/Button";
+import { Button } from "@shared/ui/Button/Button";
+import { restart } from "@app/slices/GameSlice";
 
-interface GamePanelProps {}
-
-export const GamePanel: FC<GamePanelProps> = () => {
+export const GamePanel: FC = () => {
   const dispatch = useDispatch();
   return (
     <>

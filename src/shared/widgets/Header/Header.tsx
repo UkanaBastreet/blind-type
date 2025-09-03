@@ -1,10 +1,17 @@
 import { type FC } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router";
 import PersonIcon from "../../assets/person.svg?react";
 import styles from "./Header.module.css";
-import { Icon } from "../../ui/icon/Icon";
-import { Link } from "react-router";
+import type { RootState } from "@app/store";
+import { Icon } from "@shared/ui/icon/Icon";
 
 export const Header: FC = () => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  const username = useSelector((state: RootState) => state.auth.user?.username);
+
   return (
     <header className={styles.Header}>
       <Link to={"/"}>
@@ -17,6 +24,7 @@ export const Header: FC = () => {
         <Link to={"auth"}>
           <Icon>
             <PersonIcon />
+            <span>{isAuthenticated && username ? username : "login"}</span>
           </Icon>
         </Link>
       </div>

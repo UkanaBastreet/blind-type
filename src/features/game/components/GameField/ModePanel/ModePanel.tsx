@@ -1,21 +1,19 @@
 import type { FC } from "react";
 import "./ModePanel.scss";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../../../../app/store";
+import type { RootState } from "@app/store";
 import type {
   GameModeType,
   TimeLimitType,
   WordCountType,
-} from "../../../types/game.type";
+} from "@features/game/types/game.type";
 import {
   changeMode,
   changeTimeLimit,
   changeWordsCount,
-} from "../../../slices/GameSlice";
+} from "@app/slices/GameSlice";
 
-interface ModePanelProps {}
-
-export const ModePanel: FC<ModePanelProps> = () => {
+export const ModePanel: FC = () => {
   const mode = useSelector((state: RootState) => state.game.mode);
   const timeLimit = useSelector((state: RootState) => state.game.timeLimit);
   const wordsCount = useSelector((state: RootState) => state.game.wordsCount);
