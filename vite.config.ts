@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import svgr from "vite-plugin-svgr";
+import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,6 +13,14 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    alias: {
+      "@app": path.resolve(__dirname, "src/app"),
+      "@features": path.resolve(__dirname, "src/features"),
+      "@shared": path.resolve(__dirname, "src/shared"),
+      "@widgets": path.resolve(__dirname, "src/widgets"),
+    },
+  },
   preview: {
     port: 5000, // Изменить порт (по умолчанию 4173)
     open: true, // Автоматически открыть в браузере
@@ -23,6 +32,5 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
-    
   },
 });
