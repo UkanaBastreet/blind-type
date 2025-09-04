@@ -1,5 +1,5 @@
-import { LoginForm } from "./components/LoginForm/LoginForm";
-import { RegisterForm } from "./components/RegisterForm/RegisterForm";
+import { LoginForm } from "./LoginForm/LoginForm";
+import { RegisterForm } from "./RegisterForm/RegisterForm";
 import styles from "./AuthPage.module.css";
 import { motion } from "framer-motion";
 

@@ -5,8 +5,8 @@ import { RouterProvider } from "react-router";
 import App from "./app/App";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
-import { GamePage } from "./features/game/GamePage";
-import { AuthPage } from "./features/auth/AuthPage";
+import { GamePage } from "@pages/game/GamePage";
+import { AuthPage } from "@pages/auth/AuthPage";
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

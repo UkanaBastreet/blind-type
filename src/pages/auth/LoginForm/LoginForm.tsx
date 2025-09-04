@@ -1,7 +1,7 @@
 import { type FC, useState } from "react";
 import styles from "./LoginForm.module.css";
-import { Input } from "../../../../shared/ui/Input/Input";
-import { Button } from "../../../../shared/ui/Button/Button";
+import { Input } from "../../../shared/ui/Input/Input";
+import { Button } from "../../../shared/ui/Button/Button";
 
 export const LoginForm: FC = () => {
   const [email, setEmail] = useState("");

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import "./GamePage.scss";
-import { GameField } from "./components/GameField/GameField";
-import { ResultField } from "./components/GameResult/ResultField";
+import { GameField } from "./GameField/GameField";
+import { ResultField } from "./GameResult/ResultField";
 import { AnimatePresence, motion } from "framer-motion";
 import type { RootState } from "../../app/store";
 
