@@ -4,7 +4,7 @@ import NextIcon from "@shared/assets/arrow-right.svg?react";
 import "./GameResultPanel.scss";
 import { useDispatch } from "react-redux";
 import { Button } from "@shared/ui/Button/Button";
-import { next, repeat } from "@app/slices/GameSlice";
+import { next, repeat } from "@features/game/GameSlice";
 
 
 export const GameResultPanel: FC = () => {

@@ -10,7 +10,7 @@ import "./TextField.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import type { RootState } from "@app/store";
-import { keyPressed } from "@app/slices/GameSlice";
+import { keyPressed } from "@features/game/GameSlice";
 
 export const TextField: FC = () => {
   const text = useSelector((state: RootState) => state.game.text);

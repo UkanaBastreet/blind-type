@@ -11,7 +11,7 @@ import {
   changeMode,
   changeTimeLimit,
   changeWordsCount,
-} from "@app/slices/GameSlice";
+} from "@features/game/GameSlice";
 
 export const ModePanel: FC = () => {
   const {

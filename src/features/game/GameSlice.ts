@@ -6,7 +6,7 @@ import type {
   inputError,
   TimeLimitType,
   WordCountType,
-} from "../../features/game/types/game.type";
+} from "./types/game.type";
 import { getText } from "@features/game/utils/getText";
 
 interface GameState {

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { themeReducer } from "./slices/ThemeSlice";
-import { authReducer } from "./slices/Auth.slice";
-import { gameReducer } from "./slices/GameSlice";
+import { authReducer } from "@features/auth/Auth.slice";
+import { gameReducer } from "@features/game/GameSlice";
 
 export const store = configureStore({
   reducer: {

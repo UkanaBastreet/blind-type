@@ -3,7 +3,7 @@ import "./GamePanel.scss";
 import RestartIcon from "@shared/assets/restart.svg?react";
 import { useDispatch } from "react-redux";
 import { Button } from "@shared/ui/Button/Button";
-import { restart } from "@app/slices/GameSlice";
+import { restart } from "@features/game/GameSlice";
 
 export const GamePanel: FC = () => {
   const dispatch = useDispatch();
