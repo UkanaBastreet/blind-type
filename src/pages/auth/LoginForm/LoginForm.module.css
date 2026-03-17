@@ -4,8 +4,5 @@
     flex-direction: column;
     gap: 0.5rem;
 
-    .title {
-        color: var(--sub-color);
-        font-size: var(--text-size-common);
-    }
+
 }

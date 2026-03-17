@@ -2,6 +2,7 @@ import { type FC, useState } from "react";
 import styles from "./LoginForm.module.css";
 import { Input } from "../../../shared/ui/Input/Input";
 import { Button } from "../../../shared/ui/Button/Button";
+import { Title } from "@shared/ui/Title/Title";
 
 export const LoginForm: FC = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ export const LoginForm: FC = () => {
   return (
     <>
       <div className={styles.LoginForm}>
-        <span className={styles.title}>login</span>
+        <Title>login</Title>
         <Input
           type="email"
           value={email}
