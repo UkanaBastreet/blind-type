@@ -1,8 +1,9 @@
 import { type FC } from "react";
 import "./GameResultStatistic.scss";
 import { useSelector } from "react-redux";
-import type { GameResultType } from "../../../types/game.type";
-import type { RootState } from "../../../../../app/store";
+import type { RootState } from "@app/store";
+import type { GameResultType } from "@features/game/types/game.type";
+import { Graph } from "@widgets/Graph/Graph";
 
 export const GameResultStatistic: FC = () => {
   const results = useSelector(
@@ -15,7 +16,8 @@ export const GameResultStatistic: FC = () => {
         <InfoItem title="wpm" value={results.wpm.toString()} size="big" />
         <InfoItem title="acc" value={results.acc.toString() + "%"} size="big" />
       </div>
-      <div className="graph"></div>
+      {/* <div className="graph"></div> */}
+      <Graph />
       <div className="extra-info">
         <InfoItem
           title="words"
