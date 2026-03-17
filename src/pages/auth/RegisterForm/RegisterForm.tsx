@@ -3,6 +3,7 @@ import styles from "./RegisterForm.module.css";
 import axios from "axios";
 import { Button } from "@shared/ui/Button/Button";
 import { Input } from "@shared/ui/Input/Input";
+import { Title } from "@shared/ui/Title/Title";
 
 export const RegisterForm: FC = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ export const RegisterForm: FC = () => {
   return (
     <>
       <div className={styles.RegisterForm}>
-        <span className={styles.title}>register</span>
+        <Title>register</Title>
         <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
