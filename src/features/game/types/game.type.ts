@@ -15,10 +15,12 @@ export interface GameResultType {
   errors: inputError[];
   text: string;
   time: number;
-  totalError: number;
+  totalErrors: number;
   wpm: number;
   acc: number;
   mode: GameModeType;
+  input: InputChar[];
+  length: number;
 }
 
 export interface inputError {
@@ -31,3 +33,9 @@ export type GameModeType = "time" | "words";
 export type WordCountType = 10 | 25 | 50 | 100;
 export type TimeLimitType = 5 | 15 | 30 | 60;
 export type LessonIdType = string;
+
+export interface InputChar {
+  char: string;
+  time: number;
+  index: number;
+}
