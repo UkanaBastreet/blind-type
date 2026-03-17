@@ -3,6 +3,7 @@ import type {
   GameModeType,
   GameResultType,
   GameStatusType,
+  InputChar,
   inputError,
   TimeLimitType,
   WordCountType,
@@ -20,7 +21,10 @@ interface GameState {
   status: GameStatusType;
   lastGameResults: GameResultType | null;
   startTime: number | null;
+  input: InputChar[];
 }
+
+const localGameState = localStorage.getItem("gameState");
 
 const initialState: GameState = {
   index: 0,
@@ -33,11 +37,14 @@ const initialState: GameState = {
   results: null,
   lastGameResults: null,
   startTime: null,
+  input: [],
 };
 
 const GameSlice = createSlice({
   name: "game",
-  initialState,
+  initialState: localGameState
+    ? JSON.parse(localGameState) as GameState
+    : initialState,
   reducers: {
     keyPressed: (state, action: PayloadAction<string>) => {
       const key = action.payload;
@@ -45,6 +52,9 @@ const GameSlice = createSlice({
       if (state.status === "pending") {
         state.status = "running";
         state.startTime = Date.now();
+        state.input = [];
+        state.errors = [];
+        state.lastGameResults = null;
       }
 
       if (state.status !== "running" || state.index >= state.text.length)
@@ -54,6 +64,11 @@ const GameSlice = createSlice({
 
       if (char === key) {
         state.index++;
+        state.input.push({
+          char,
+          index: state.index - 1,
+          time: Date.now(),
+        });
       } else {
         state.errors.push({ char, index: state.index, input: key });
       }
@@ -67,11 +82,13 @@ const GameSlice = createSlice({
           acc: Math.round((correctChars / state.index) * 100),
           date: state.startTime!,
           errors: state.errors,
-          totalError: state.errors.length,
+          totalErrors: state.errors.length,
           mode: state.mode,
           text: state.text,
           time: duration,
           wpm: Math.round((state.text.split(" ").length / duration) * 60),
+          input: state.input,
+          length: state.text.length,
         };
         state.lastGameResults = state.results;
         state.status = "finished";
@@ -84,6 +101,8 @@ const GameSlice = createSlice({
       state.startTime = null;
       state.status = "pending";
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
+      state.input = [];
+      localStorage.setItem("gameState", JSON.stringify(state));
     },
     repeat: (state) => {
       state.index = 0;
@@ -92,6 +111,8 @@ const GameSlice = createSlice({
       state.startTime = null;
       state.status = "pending";
       // state.text = getText(state.mode, state.wordsCount, state.timeLimit);
+      state.input = [];
+      localStorage.setItem("gameState", JSON.stringify(state));
     },
     next: (state) => {
       state.index = 0;
@@ -100,6 +121,8 @@ const GameSlice = createSlice({
       state.startTime = null;
       state.status = "pending";
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
+      state.input = [];
+      localStorage.setItem("gameState", JSON.stringify(state));
     },
     changeMode: (state, action: PayloadAction<GameModeType>) => {
       state.mode = action.payload;
@@ -109,6 +132,8 @@ const GameSlice = createSlice({
       state.results = null;
       state.startTime = null;
       state.status = "pending";
+      state.input = [];
+      localStorage.setItem("gameState", JSON.stringify(state));
     },
     changeWordsCount(state, action: PayloadAction<WordCountType>) {
       state.wordsCount = action.payload;
@@ -118,6 +143,8 @@ const GameSlice = createSlice({
       state.results = null;
       state.startTime = null;
       state.status = "pending";
+      state.input = [];
+      localStorage.setItem("gameState", JSON.stringify(state));
     },
     changeTimeLimit(state, action: PayloadAction<TimeLimitType>) {
       state.timeLimit = action.payload;
@@ -127,6 +154,8 @@ const GameSlice = createSlice({
       state.results = null;
       state.startTime = null;
       state.status = "pending";
+      state.input = [];
+      localStorage.setItem("gameState", JSON.stringify(state));
     },
   },
   extraReducers() {},
