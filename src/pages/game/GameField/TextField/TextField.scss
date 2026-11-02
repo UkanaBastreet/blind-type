@@ -20,7 +20,10 @@
     color: var(--sub-color);
     text-decoration: underline;
   }
-  .completed-text {
+  .correct-char {
     color: var(--main-color);
+  }
+  .incorrect-char {
+    color: #ff6b6b;
   }
 }

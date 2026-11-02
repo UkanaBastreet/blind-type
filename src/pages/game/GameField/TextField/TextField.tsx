@@ -15,7 +15,8 @@ import { keyPressed } from "@features/game/GameSlice";
 export const TextField: FC = () => {
   const text = useSelector((state: RootState) => state.game.text);
   const index = useSelector((state: RootState) => state.game.index);
-  const { pendingText, currentChar, completedText } = useText(text, index);
+  const input = useSelector((state: RootState) => state.game.input);
+  const { currentChar, pendingText } = useText(text, index);
   const [shift, setShift] = useState(0);
   const textStyles = { "--shift": shift } as CSSProperties;
 
@@ -55,7 +56,14 @@ export const TextField: FC = () => {
       transition={{ duration: 0.2 }}
     >
       <div className="text" ref={textRef} style={textStyles}>
-        <span className="completed-text">{completedText}</span>
+        {input.map((item) => (
+          <span
+            key={item.index}
+            className={item.correct ? "correct-char" : "incorrect-char"}
+          >
+            {item.char}
+          </span>
+        ))}
         <span className="current-char" ref={curRef}>
           {currentChar}
         </span>
@@ -66,8 +74,7 @@ export const TextField: FC = () => {
 };
 
 const useText = (text: string, index: number) => {
-  const completedText = text.slice(0, index);
   const currentChar = text[index];
   const pendingText = text.slice(index + 1, text.length);
-  return { completedText, currentChar, pendingText };
+  return { currentChar, pendingText };
 };

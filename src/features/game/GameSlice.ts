@@ -4,7 +4,6 @@ import type {
   GameResultType,
   GameStatusType,
   InputChar,
-  inputError,
   TimeLimitType,
   WordCountType,
 } from "./types/game.type";
@@ -13,7 +12,6 @@ import { getText } from "@features/game/utils/getText";
 interface GameState {
   index: number;
   text: string;
-  errors: inputError[];
   results: GameResultType | null;
   mode: GameModeType;
   wordsCount: WordCountType;
@@ -29,7 +27,6 @@ const localGameState = localStorage.getItem("gameState");
 const initialState: GameState = {
   index: 0,
   text: getText("time", 25, 15),
-  errors: [],
   status: "pending",
   mode: "time",
   wordsCount: 25,
@@ -53,7 +50,6 @@ const GameSlice = createSlice({
         state.status = "running";
         state.startTime = Date.now();
         state.input = [];
-        state.errors = [];
         state.lastGameResults = null;
       }
 
@@ -61,28 +57,31 @@ const GameSlice = createSlice({
         return;
 
       const char = state.text[state.index];
+      const isCorrect = char === key;
 
-      if (char === key) {
-        state.index++;
-        state.input.push({
-          char,
-          index: state.index - 1,
-          time: Date.now(),
-        });
-      } else {
-        state.errors.push({ char, index: state.index, input: key });
-      }
+      state.index++;
+      state.input.push({
+        char: key,
+        index: state.index - 1,
+        time: Date.now(),
+        correct: isCorrect,
+      });
 
       if (state.index >= state.text.length) {
         const endTime = Date.now();
         const duration = Math.floor((endTime - state.startTime!) / 1000);
-        const correctChars = state.index - state.errors.length;
+        const errors = state.input.filter((item) => !item.correct);
+        const correctChars = state.input.filter((item) => item.correct).length;
 
         state.results = {
           acc: Math.round((correctChars / state.index) * 100),
           date: state.startTime!,
-          errors: state.errors,
-          totalErrors: state.errors.length,
+          errors: errors.map((e) => ({
+            char: state.text[e.index],
+            index: e.index,
+            input: e.char,
+          })),
+          totalErrors: errors.length,
           mode: state.mode,
           text: state.text,
           time: duration,
@@ -96,7 +95,6 @@ const GameSlice = createSlice({
     },
     restart: (state) => {
       state.index = 0;
-      state.errors = [];
       state.results = null;
       state.startTime = null;
       state.status = "pending";
@@ -106,18 +104,13 @@ const GameSlice = createSlice({
     },
     repeat: (state) => {
       state.index = 0;
-      state.errors = [];
-      // state.results = null;
       state.startTime = null;
       state.status = "pending";
-      // state.text = getText(state.mode, state.wordsCount, state.timeLimit);
       state.input = [];
       localStorage.setItem("gameState", JSON.stringify(state));
     },
     next: (state) => {
       state.index = 0;
-      state.errors = [];
-      // state.results = null;
       state.startTime = null;
       state.status = "pending";
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
@@ -128,7 +121,6 @@ const GameSlice = createSlice({
       state.mode = action.payload;
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
       state.index = 0;
-      state.errors = [];
       state.results = null;
       state.startTime = null;
       state.status = "pending";
@@ -139,7 +131,6 @@ const GameSlice = createSlice({
       state.wordsCount = action.payload;
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
       state.index = 0;
-      state.errors = [];
       state.results = null;
       state.startTime = null;
       state.status = "pending";
@@ -150,7 +141,6 @@ const GameSlice = createSlice({
       state.timeLimit = action.payload;
       state.text = getText(state.mode, state.wordsCount, state.timeLimit);
       state.index = 0;
-      state.errors = [];
       state.results = null;
       state.startTime = null;
       state.status = "pending";

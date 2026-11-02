@@ -9,63 +9,154 @@ export const Graph = () => {
   );
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (!lastGameResults) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx || !containerRef.current) return;
+
     const width = containerRef.current.clientWidth;
     const height = containerRef.current.clientHeight;
-    canvas.width = width;
-    canvas.height = height;
+    const padding = { top: 20, right: 20, bottom: 30, left: 50 };
+
+    canvas.width = width * window.devicePixelRatio;
+    canvas.height = height * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
     ctx.clearRect(0, 0, width, height);
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
 
-    let min = 0;
-    let max = 0;
+    // Calculate data points
     let lastTime = lastGameResults.date;
-    const coords = lastGameResults.input.map((input) => {
-      const { char, index, time } = input;
-      const x = Math.floor((index / lastGameResults.text.length) * width);
-      const y = time - lastTime;
-      if (y > max) max = y;
-      if (y < min) min = y;
+    const dataPoints = lastGameResults.input.map((input) => {
+      const { index, time, correct } = input;
+      const timeDiff = (time - lastTime) / 1000; // Convert to seconds
       lastTime = time;
-      const haveError = lastGameResults.errors.find((e) => e.index === index);
-
-      return { x, y, haveError, char };
+      return {
+        x: (index / lastGameResults.text.length) * (width - padding.left - padding.right) + padding.left,
+        y: timeDiff,
+        correct,
+      };
     });
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    coords.forEach((c) => {
-      const { x: xc, y, haveError, char } = c;
-      const x = (height / (max - min)) * xc;
-      ctx.lineWidth = 6;
-      ctx.strokeStyle = "#007acc";
-      ctx.font = "12px Arial";
-      ctx.lineTo(x, y);
-      if (haveError) {
-        ctx.fillStyle = "tomato";
-        ctx.fillText(char, x, y - 10);
+
+    // Find min/max for Y-axis scaling
+    const yValues = dataPoints.map((p) => p.y);
+    const minY = Math.min(...yValues);
+    const maxY = Math.max(...yValues);
+    const yRange = maxY - minY || 1;
+
+    // Scale Y coordinates
+    const scaledPoints = dataPoints.map((p) => ({
+      ...p,
+      scaledY: height - padding.bottom - ((p.y - minY) / yRange) * (height - padding.top - padding.bottom),
+    }));
+
+    // Draw grid
+    ctx.strokeStyle = "rgba(100, 181, 246, 0.1)";
+    ctx.lineWidth = 1;
+    ctx.font = "12px Arial";
+    ctx.fillStyle = "#64b5f6";
+
+    // Horizontal grid lines
+    for (let i = 0; i <= 4; i++) {
+      const y = padding.top + (i / 4) * (height - padding.top - padding.bottom);
+      ctx.beginPath();
+      ctx.moveTo(padding.left, y);
+      ctx.lineTo(width - padding.right, y);
+      ctx.stroke();
+
+      // Y-axis labels (in seconds with 2 decimal places)
+      const value = (maxY - (i / 4) * yRange).toFixed(2);
+      ctx.fillText(`${value}s`, 35, y + 3);
+    }
+
+    // Vertical grid lines
+    for (let i = 0; i <= 5; i++) {
+      const x = padding.left + (i / 5) * (width - padding.left - padding.right);
+      ctx.beginPath();
+      ctx.moveTo(x, padding.top);
+      ctx.lineTo(x, height - padding.bottom);
+      ctx.stroke();
+
+      // X-axis labels
+      const progress = Math.round((i / 5) * 100);
+      ctx.fillText(`${progress}%`, x - 10, height - 10);
+    }
+
+    // Draw smooth curve with gradient
+    if (scaledPoints.length > 1) {
+      // Create gradient
+      const gradient = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
+      gradient.addColorStop(0, "rgba(100, 181, 246, 0.3)");
+      gradient.addColorStop(1, "rgba(100, 181, 246, 0.0)");
+
+      // Draw area under curve (narrower)
+      ctx.beginPath();
+      const gradientHeight = (height - padding.top - padding.bottom) * 0.5; // 50% of height
+      ctx.moveTo(scaledPoints[0].x, scaledPoints[0].scaledY + gradientHeight);
+      ctx.lineTo(scaledPoints[0].x, scaledPoints[0].scaledY);
+
+      // Smooth curve using quadratic Bezier
+      for (let i = 0; i < scaledPoints.length - 1; i++) {
+        const xc = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
+        const yc = (scaledPoints[i].scaledY + scaledPoints[i + 1].scaledY) / 2;
+        ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].scaledY, xc, yc);
       }
 
-      ctx.fillStyle = "#1d1d1d";
-      ctx.fillText(char, x, y - 10);
+      ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].scaledY);
+      ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].scaledY + gradientHeight);
+      ctx.closePath();
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // Draw the line
+      ctx.beginPath();
+      ctx.moveTo(scaledPoints[0].x, scaledPoints[0].scaledY);
+
+      for (let i = 0; i < scaledPoints.length - 1; i++) {
+        const xc = (scaledPoints[i].x + scaledPoints[i + 1].x) / 2;
+        const yc = (scaledPoints[i].scaledY + scaledPoints[i + 1].scaledY) / 2;
+        ctx.quadraticCurveTo(scaledPoints[i].x, scaledPoints[i].scaledY, xc, yc);
+      }
+
+      ctx.lineTo(scaledPoints[scaledPoints.length - 1].x, scaledPoints[scaledPoints.length - 1].scaledY);
+      ctx.strokeStyle = "#64b5f6";
+      ctx.lineWidth = 2;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.stroke();
+    }
+
+    // Draw error markers
+    scaledPoints.forEach((point) => {
+      if (!point.correct) {
+        ctx.beginPath();
+        ctx.arc(point.x, point.scaledY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = "#ff6b6b";
+        ctx.fill();
+        ctx.strokeStyle = "#ff6b6b";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
     });
 
-    ctx.stroke();
+    // Draw axis labels
+    ctx.save();
+    ctx.translate(18, height / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#64b5f6";
+    ctx.fillText("Time per char (s)", 0, 0);
+    ctx.restore();
+
+    ctx.textAlign = "center";
+    ctx.fillText("Progress", width / 2, height - 5);
   }, [lastGameResults]);
+
   return (
-    <>
-      <div ref={containerRef} className={styles.Graph}>
-        <canvas
-          ref={canvasRef}
-          height={containerRef.current?.clientHeight}
-          width={containerRef.current?.clientWidth}
-        />
-      </div>
-    </>
+    <div ref={containerRef} className={styles.Graph}>
+      <canvas ref={canvasRef} />
+    </div>
   );
 };

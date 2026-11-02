@@ -38,4 +38,5 @@ export interface InputChar {
   char: string;
   time: number;
   index: number;
+  correct: boolean;
 }
