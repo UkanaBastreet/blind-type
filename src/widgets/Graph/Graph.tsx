@@ -131,12 +131,14 @@ export const Graph = () => {
     // Draw error markers
     scaledPoints.forEach((point) => {
       if (!point.correct) {
-        ctx.beginPath();
-        ctx.arc(point.x, point.scaledY, 5, 0, Math.PI * 2);
-        ctx.fillStyle = "#ff6b6b";
-        ctx.fill();
+        const size = 4;
         ctx.strokeStyle = "#ff6b6b";
         ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(point.x - size, point.scaledY - size);
+        ctx.lineTo(point.x + size, point.scaledY + size);
+        ctx.moveTo(point.x + size, point.scaledY - size);
+        ctx.lineTo(point.x - size, point.scaledY + size);
         ctx.stroke();
       }
     });
