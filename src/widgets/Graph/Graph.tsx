@@ -19,7 +19,7 @@ export const Graph = () => {
 
     const width = containerRef.current.clientWidth;
     const height = containerRef.current.clientHeight;
-    const padding = { top: 20, right: 20, bottom: 30, left: 50 };
+    const padding = { top: 20, right: 20, bottom: 40, left: 50 };
 
     canvas.width = width * window.devicePixelRatio;
     canvas.height = height * window.devicePixelRatio;
@@ -34,7 +34,7 @@ export const Graph = () => {
       const timeDiff = (time - lastTime) / 1000; // Convert to seconds
       lastTime = time;
       return {
-        x: (index / lastGameResults.text.length) * (width - padding.left - padding.right) + padding.left,
+        x: (index / (lastGameResults.text.length - 1)) * (width - padding.left - padding.right) + padding.left,
         y: timeDiff,
         correct,
       };
@@ -68,7 +68,7 @@ export const Graph = () => {
 
       // Y-axis labels (in seconds with 2 decimal places)
       const value = (maxY - (i / 4) * yRange).toFixed(2);
-      ctx.fillText(`${value}s`, 35, y + 3);
+      ctx.fillText(`${value}s`, 15, y + 3);
     }
 
     // Vertical grid lines
