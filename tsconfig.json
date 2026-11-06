@@ -3,7 +3,6 @@
     "jsx": "react-jsx",
     "types": ["vite/client"],
     "baseUrl": "./",
-    "ignoreDeprecations": "6.0",
     "paths": {
       "@app/*": ["src/app/*"],
       "@features/*": ["src/features/*"],
